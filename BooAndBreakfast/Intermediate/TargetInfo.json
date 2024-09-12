@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "BooAndBreakfast",
+			"Path": "..\\Source\\BooAndBreakfast.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "BooAndBreakfastEditor",
+			"Path": "..\\Source\\BooAndBreakfastEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

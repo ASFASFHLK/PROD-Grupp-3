@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\BooAndBreakfast.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\BooAndBreakfast.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\BooAndBreakfastEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\BooAndBreakfast">
+      <UniqueIdentifier>{1EB40B6A-F404-388C-BB1B-4BCD392F713C}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\BooAndBreakfast\BooAndBreakfast.Build.cs">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\BooAndBreakfast\BooAndBreakfast.cpp">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BooAndBreakfast\BooAndBreakfast.h">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BooAndBreakfast\BooAndBreakfastCharacter.cpp">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BooAndBreakfast\BooAndBreakfastCharacter.h">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BooAndBreakfast\BooAndBreakfastGameMode.cpp">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BooAndBreakfast\BooAndBreakfastGameMode.h">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BooAndBreakfast\BooAndBreakfastPlayerController.cpp">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BooAndBreakfast\BooAndBreakfastPlayerController.h">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BooAndBreakfast\BooAndBreakfastProjectile.cpp">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BooAndBreakfast\BooAndBreakfastProjectile.h">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BooAndBreakfast\TP_PickUpComponent.cpp">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BooAndBreakfast\TP_PickUpComponent.h">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\BooAndBreakfast\TP_WeaponComponent.cpp">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\BooAndBreakfast\TP_WeaponComponent.h">
+      <Filter>Source\BooAndBreakfast</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
