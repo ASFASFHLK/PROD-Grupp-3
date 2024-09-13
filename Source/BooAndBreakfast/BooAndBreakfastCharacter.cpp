@@ -93,7 +93,6 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 		FRotator R = GetActorRotation();
 		if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
 		{
-			double 
 			AddControllerYawInput(LookAxisVector.X);
 		}
 		if(R.Pitch + LookAxisVector.Y <= MaxPitch && R.Pitch + LookAxisVector.X >= MinPitch)
