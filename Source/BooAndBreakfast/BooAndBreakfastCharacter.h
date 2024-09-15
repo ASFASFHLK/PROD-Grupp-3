@@ -77,15 +77,21 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	int MinPitch;
 	UPROPERTY()
-	bool FirstInterview;
+	bool FirstInterview = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AInterview* Interview;
 	UFUNCTION()
 	void Repeat();
+	UFUNCTION()
+	void Proceed();
 	
 private:
 	UPROPERTY()
-	bool Day;
+	bool Day = true;
+	UPROPERTY()
+	int CountToProceed = 2;
+	UPROPERTY()
+	int CurrentCount = 0;
 
 	
 };

@@ -1,6 +1,9 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "BooAndBreakfastCharacter.h"
+
+#include <chrono>
+
 #include "BooAndBreakfastProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
@@ -61,7 +64,8 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		//
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Look);
-		// EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, );
+		EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
+		EnhancedInputComponent->BindAction(ProceedAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Proceed);
 	}
 	else
 	{
@@ -73,10 +77,23 @@ void ABooAndBreakfastCharacter::Repeat()
 {
 	if(FirstInterview)
 	{
-		FirstInterview = false;
+		Interview->RepeatWithNothingToRepeat();
 		return;
 	}
 	Interview->RepeatLastInterview();
+}
+
+void ABooAndBreakfastCharacter::Proceed()
+{
+	if(CurrentCount >= CountToProceed)// Byt till natt
+	{
+		Day = !Day;
+		CurrentCount = 0;
+		return;
+	}
+	CurrentCount++;
+	FirstInterview = false;
+	Interview->OnInterview();
 }
 
 
@@ -104,15 +121,29 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 		if(Day)
 		{
 			FRotator R = GetActorRotation();
+			FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
 			if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
 			{
 				AddControllerYawInput(LookAxisVector.X);
 			}
-			if(R.Pitch + LookAxisVector.Y <= MaxPitch && R.Pitch + LookAxisVector.X >= MinPitch)
+			if(C.Pitch + LookAxisVector.Y <= MaxPitch && C.Pitch + LookAxisVector.X >= MinPitch)
 			{
 				AddControllerPitchInput(LookAxisVector.Y);
 			}
-			UE_LOG(LogTemp, Display, TEXT("C Yaw:%f, N Yaw: %f"), R.Yaw, LookAxisVector.X);
+			// UE_LOG(LogTemp, Display, TEXT("C Yaw:%f, N Yaw: %f"), R.Yaw, LookAxisVector.X);
+			// Fixar koden till look som inte fungerar
+			// if(GetActorRotation().Yaw >MaxYaw) 
+			// {
+			// 	UE_LOG(LogTemp, Display, TEXT("C Yaw:%f"), R.Yaw);
+			// 	R.Yaw = MaxYaw;
+			// 	UE_LOG(LogTemp, Display, TEXT("New Yaw:%f"), R.Yaw);
+			// 	GetParentActor()->SetActorRotation(R);
+			// }
+			// if(GetActorRotation().Yaw < MinYaw)
+			// {
+			// 	R.Yaw = MinYaw;
+			// 	GetParentActor()->SetActorRotation(R);
+			// }
 		}
 		else
 		{

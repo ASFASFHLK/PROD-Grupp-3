@@ -30,10 +30,10 @@ public:
 	void RepeatLastInterview();
 	UFUNCTION()
 	void RepeatWithNothingToRepeat();
-	UPROPERTY(BlueprintReadWrite)
-	USoundBase* NothingToRepeat;
-	UPROPERTY(BlueprintReadWrite)
-	TArray<USoundBase*> Interviews;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundWave* NothingToRepeat;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<USoundWave*> Interviews;
 	UPROPERTY()
 	AActor* Player;
 	UPROPERTY()

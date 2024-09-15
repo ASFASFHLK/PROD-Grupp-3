@@ -39,7 +39,7 @@ void AInterview::RepeatWithNothingToRepeat()
 
 void AInterview::OnInterview_Implementation()
 {
-	InterviewSelector = FMath::RandRange(0, Interviews.Num());
+	InterviewSelector = FMath::RandRange(0, Interviews.Num() - 1);
 	UGameplayStatics::PlaySound2D(this, Interviews[InterviewSelector]);
 }
 
