@@ -32,7 +32,7 @@ public:
 	AActor* Player;
 	
 private:
-	float VolumeMultiplier;
-	float StartTime;
-	float PitchMultiplier;
+	// float VolumeMultiplier;
+	// float StartTime;
+	// float PitchMultiplier;
 };
