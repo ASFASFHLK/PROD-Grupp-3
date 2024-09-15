@@ -26,12 +26,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION(BlueprintNativeEvent)
 	void OnInterview();
+	UFUNCTION()
+	void RepeatLastInterview();
 	UPROPERTY(EditAnywhere)
 	TArray<USoundBase*> Interviews;
 	UPROPERTY()
 	AActor* Player;
 	UPROPERTY()
-	int32 InterviewSelector;
+	int32 InterviewSelector = 0;
 	
 private:
 	// float VolumeMultiplier;

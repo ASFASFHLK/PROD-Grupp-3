@@ -76,6 +76,8 @@ public:
 	int MaxPitch;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	int MinPitch;
+	UPROPERTY()
+	bool FirstInterview;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AInterview* Interview;
 	UFUNCTION()

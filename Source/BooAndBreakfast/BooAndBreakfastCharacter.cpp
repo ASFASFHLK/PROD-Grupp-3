@@ -9,6 +9,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Interview.h"
 #include "Engine/LocalPlayer.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -70,6 +71,12 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 
 void ABooAndBreakfastCharacter::Repeat()
 {
+	if(FirstInterview)
+	{
+		FirstInterview = false;
+		return;
+	}
+	Interview->RepeatLastInterview();
 }
 
 

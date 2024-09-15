@@ -27,6 +27,11 @@ void AInterview::Tick(float DeltaTime)
 
 }
 
+void AInterview::RepeatLastInterview()
+{
+	UGameplayStatics::PlaySound2D(this, Interviews[InterviewSelector]);
+}
+
 void AInterview::OnInterview_Implementation()
 {
 	InterviewSelector = FMath::RandRange(0, Interviews.Num());
