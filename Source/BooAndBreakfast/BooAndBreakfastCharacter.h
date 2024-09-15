@@ -74,6 +74,10 @@ public:
 	int MaxPitch;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	int MinPitch;
+private:
+	UPROPERTY()
+	bool Day;
 
+	
 };
 

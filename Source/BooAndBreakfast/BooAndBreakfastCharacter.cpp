@@ -89,17 +89,23 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 	if (Controller != nullptr)
 	{
 		// add yaw and pitch input to controller
-
-		FRotator R = GetActorRotation();
-		if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
+		if(Day)
+		{
+			FRotator R = GetActorRotation();
+			if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
+			{
+				AddControllerYawInput(LookAxisVector.X);
+			}
+			if(R.Pitch + LookAxisVector.Y <= MaxPitch && R.Pitch + LookAxisVector.X >= MinPitch)
+			{
+				AddControllerPitchInput(LookAxisVector.Y);
+			}
+			UE_LOG(LogTemp, Display, TEXT("C Yaw:%f, N Yaw: %f"), R.Yaw, LookAxisVector.X);
+		}
+		else
 		{
 			AddControllerYawInput(LookAxisVector.X);
 		}
-		if(R.Pitch + LookAxisVector.Y <= MaxPitch && R.Pitch + LookAxisVector.X >= MinPitch)
-		{
-			AddControllerPitchInput(LookAxisVector.Y);
-		}
-		UE_LOG(LogTemp, Display, TEXT("C Yaw:%f, N Yaw: %f"), R.Yaw, LookAxisVector.X);
 	}
 }
 	
