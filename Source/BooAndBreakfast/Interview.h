@@ -28,7 +28,11 @@ public:
 	void OnInterview();
 	UFUNCTION()
 	void RepeatLastInterview();
-	UPROPERTY(EditAnywhere)
+	UFUNCTION()
+	void RepeatWithNothingToRepeat();
+	UPROPERTY(BlueprintReadWrite)
+	USoundBase* NothingToRepeat;
+	UPROPERTY(BlueprintReadWrite)
 	TArray<USoundBase*> Interviews;
 	UPROPERTY()
 	AActor* Player;

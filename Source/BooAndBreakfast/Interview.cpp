@@ -32,6 +32,11 @@ void AInterview::RepeatLastInterview()
 	UGameplayStatics::PlaySound2D(this, Interviews[InterviewSelector]);
 }
 
+void AInterview::RepeatWithNothingToRepeat()
+{
+	UGameplayStatics::PlaySound2D(this, NothingToRepeat);
+}
+
 void AInterview::OnInterview_Implementation()
 {
 	InterviewSelector = FMath::RandRange(0, Interviews.Num());
