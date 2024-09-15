@@ -30,6 +30,8 @@ public:
 	TArray<USoundBase*> Interviews;
 	UPROPERTY()
 	AActor* Player;
+	UPROPERTY()
+	int32 InterviewSelector;
 	
 private:
 	// float VolumeMultiplier;

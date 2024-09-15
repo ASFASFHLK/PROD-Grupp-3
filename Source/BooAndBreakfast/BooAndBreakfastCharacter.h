@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+// #include "Interview.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "BooAndBreakfastCharacter.generated.h"
@@ -12,6 +13,7 @@ class USkeletalMeshComponent;
 class UCameraComponent;
 class UInputAction;
 class UInputMappingContext;
+class AInterview;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -31,11 +33,11 @@ class ABooAndBreakfastCharacter : public ACharacter
 
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* JumpAction;
+	UInputAction* RepeatAction;
 
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* MoveAction;
+	UInputAction* ProceedAction;
 	
 public:
 	ABooAndBreakfastCharacter();
@@ -74,6 +76,11 @@ public:
 	int MaxPitch;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	int MinPitch;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AInterview* Interview;
+	UFUNCTION()
+	void Repeat();
+	
 private:
 	UPROPERTY()
 	bool Day;

@@ -29,7 +29,7 @@ void AInterview::Tick(float DeltaTime)
 
 void AInterview::OnInterview_Implementation()
 {
-	int32 InterviewSelector = FMath::RandRange(0, Interviews.Num());
+	InterviewSelector = FMath::RandRange(0, Interviews.Num());
 	UGameplayStatics::PlaySound2D(this, Interviews[InterviewSelector]);
 }
 
