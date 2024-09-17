@@ -2,7 +2,6 @@
 
 #include "BooAndBreakfastCharacter.h"
 
-#include <chrono>
 
 #include "BooAndBreakfastProjectile.h"
 #include "Animation/AnimInstance.h"
@@ -13,7 +12,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Interview.h"
+#include "DynamicMesh/DynamicMesh3.h"
 #include "Engine/LocalPlayer.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -39,7 +41,6 @@ ABooAndBreakfastCharacter::ABooAndBreakfastCharacter()
 	Mesh1P->CastShadow = false;
 	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
-
 }
 
 void ABooAndBreakfastCharacter::BeginPlay()
@@ -75,38 +76,99 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 
 void ABooAndBreakfastCharacter::Repeat()
 {
-	if(FirstInterview)
+	if(Day)
 	{
-		Interview->RepeatWithNothingToRepeat();
-		return;
+		if(FirstInterview)
+		{
+			Interview->RepeatWithNothingToRepeat();
+			return;
+		}
+		Interview->RepeatLastInterview();
 	}
-	Interview->RepeatLastInterview();
+	else
+	{
+		switch (CurrentRoom)
+		{
+		case 0:
+			TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
+			break;
+		case 1:
+			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
+			break;
+		case 2:
+			TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
+			break;
+		default: ;
+		}
+		--CurrentRoom;
+	}
 }
 
 void ABooAndBreakfastCharacter::Proceed()
 {
-	if(CurrentCount >= CountToProceed)// Byt till natt
+	if(Day)
 	{
-		Day = !Day;
-		CurrentCount = 0;
-		return;
+		if(CurrentCount >= CountToProceed)// Byt till natt
+		{
+			Day = false;
+			CurrentCount = 0;
+			return;
+		}
+		CurrentCount++;
+		FirstInterview = false;
+		Interview->OnInterview();
 	}
-	CurrentCount++;
-	FirstInterview = false;
-	Interview->OnInterview();
+	else
+	{
+		switch (CurrentRoom)
+		{
+		case 0:
+			TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
+			break;
+		case 1:
+			TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
+			break;
+		case 2:
+			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
+			break;
+		default: ;
+		}
+		++CurrentRoom;
+		
+	}
+}
+
+void ABooAndBreakfastCharacter::SelectRoom()
+{
+	RoomToReport = CurrentRoom;
+}
+
+void ABooAndBreakfastCharacter::SubmitChoice()
+{
+	if(RoomToReport == RoomWithGhost)
+	{
+		UE_LOG(LogTemp, Display, TEXT("Win"));
+	}
+	else
+	{
+		GetWorld()->GetFirstPlayerController()->ConsoleCommand("quit");
+	}
 }
 
 
 void ABooAndBreakfastCharacter::Move(const FInputActionValue& Value)
 {
-	// input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
-
-	if (Controller != nullptr)
+	if(!Day)
 	{
-		// add movement 
-		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
-		AddMovementInput(GetActorRightVector(), MovementVector.X);
+		// input is a Vector2D
+		FVector2D MovementVector = Value.Get<FVector2D>();
+
+		if (Controller != nullptr)
+		{
+			// add movement 
+			AddMovementInput(GetActorForwardVector(), MovementVector.Y);
+			AddMovementInput(GetActorRightVector(), MovementVector.X);
+		}
 	}
 }
 

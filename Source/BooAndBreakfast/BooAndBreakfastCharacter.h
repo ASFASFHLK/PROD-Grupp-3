@@ -80,10 +80,18 @@ public:
 	bool FirstInterview = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AInterview* Interview;
+	UPROPERTY(EditAnywhere)
+	TArray<FVector> PositionsToTeleportTo;
+	UPROPERTY(EditAnywhere)
+	TArray<FRotator> RotationsToTeleportTo;
 	UFUNCTION()
 	void Repeat();
 	UFUNCTION()
 	void Proceed();
+	UFUNCTION()
+	void SelectRoom();
+	UFUNCTION()
+	void SubmitChoice();
 	
 private:
 	UPROPERTY()
@@ -92,6 +100,12 @@ private:
 	int CountToProceed = 2;
 	UPROPERTY()
 	int CurrentCount = 0;
+	UPROPERTY()
+	int CurrentRoom = 0;
+	UPROPERTY()
+	int RoomToReport = 3;
+	UPROPERTY(VisibleAnywhere)
+	int RoomWithGhost = 0;
 
 	
 };
