@@ -92,17 +92,19 @@ void ABooAndBreakfastCharacter::Repeat()
 		switch (CurrentRoom)
 		{
 		case 0:
+			CurrentRoom = 2;
 			TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
 			break;
 		case 1:
+			--CurrentRoom;
 			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
 			break;
 		case 2:
+			--CurrentRoom;
 			TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
 			break;
 		default: ;
 		}
-		--CurrentRoom;
 	}
 }
 
@@ -125,17 +127,19 @@ void ABooAndBreakfastCharacter::Proceed()
 		switch (CurrentRoom)
 		{
 		case 0:
+			++CurrentRoom;
 			TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
 			break;
 		case 1:
+			++CurrentRoom;
 			TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
 			break;
 		case 2:
+			CurrentRoom = 0;
 			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
 			break;
 		default: ;
 		}
-		++CurrentRoom;
 		
 	}
 }
@@ -143,6 +147,7 @@ void ABooAndBreakfastCharacter::Proceed()
 void ABooAndBreakfastCharacter::SelectRoom()
 {
 	RoomToReport = CurrentRoom;
+	UE_LOG(LogTemp, Display, TEXT("RoomToReport%d"),RoomToReport);
 }
 
 void ABooAndBreakfastCharacter::SubmitChoice()
