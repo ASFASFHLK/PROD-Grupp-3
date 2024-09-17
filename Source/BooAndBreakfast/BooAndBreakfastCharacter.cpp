@@ -61,12 +61,14 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		// EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 		//
 		// Moving
-		// EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Move);
 		//
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Look);
 		EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
 		EnhancedInputComponent->BindAction(ProceedAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Proceed);
+		EnhancedInputComponent->BindAction(SubmitRoomAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::SubmitChoice);
+		EnhancedInputComponent->BindAction(SelectRoomAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::SelectRoom);
 	}
 	else
 	{
