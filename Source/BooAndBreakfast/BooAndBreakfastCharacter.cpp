@@ -116,6 +116,7 @@ void ABooAndBreakfastCharacter::Proceed()
 		{
 			Day = false;
 			CurrentCount = 0;
+			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
 			return;
 		}
 		CurrentCount++;
