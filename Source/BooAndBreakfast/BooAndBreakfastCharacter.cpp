@@ -67,6 +67,11 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 	}
 }
 
+void ABooAndBreakfastCharacter::SetDay(bool NewDay)
+{
+	Day = NewDay;
+}
+
 
 void ABooAndBreakfastCharacter::Move(const FInputActionValue& Value)
 {
