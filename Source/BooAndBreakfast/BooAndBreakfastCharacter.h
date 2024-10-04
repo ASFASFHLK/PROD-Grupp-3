@@ -12,6 +12,7 @@ class USkeletalMeshComponent;
 class UCameraComponent;
 class UInputAction;
 class UInputMappingContext;
+class AIntroduction;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -31,11 +32,13 @@ class ABooAndBreakfastCharacter : public ACharacter
 
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* JumpAction;
-
-	/** Move Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* ProceedAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* LookAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* SelectRoomAction;
 	
 public:
 	ABooAndBreakfastCharacter();
@@ -43,20 +46,12 @@ public:
 protected:
 	virtual void BeginPlay();
 
-public:
-		
-	/** Look Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* LookAction;
-
-protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
-protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	// End of APawn interface
@@ -66,10 +61,46 @@ public:
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	int MaxYaw;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	int MinYaw;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	int MaxPitch;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	int MinPitch;
 	UPROPERTY()
-	bool Day = true;
+	bool FirstInterview = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AIntroduction* Introduction;
+	UPROPERTY(EditAnywhere)
+	TArray<FVector> PositionsToTeleportTo;
+	UPROPERTY(EditAnywhere)
+	TArray<FRotator> RotationsToTeleportTo;
+	UFUNCTION()
+	void Repeat();
+	UFUNCTION()
+	void Proceed();
+	UFUNCTION()
+	void SelectRoom();
+	UFUNCTION()
+	void SubmitChoice();
+	
 	UFUNCTION()
 	void SetDay(bool NewDay);
+private:
+	UPROPERTY()
+	bool Day = true;
+	UPROPERTY()
+	int CountToProceed = 2;
+	UPROPERTY()
+	int CurrentCount = 0;
+	UPROPERTY()
+	int CurrentRoom = 0;
+	UPROPERTY()
+	int RoomToReport = 3;
+	UPROPERTY(VisibleAnywhere)
+	int RoomWithGhost = 0;
 
 };
 
