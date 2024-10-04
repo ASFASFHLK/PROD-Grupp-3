@@ -43,11 +43,11 @@ public:
 	UPROPERTY()
 	int32 WhichInterview;
 	UPROPERTY()
-	bool Tutorial = true;
-	UPROPERTY()
 	int32 NumberOfInterviews = 2;
 	UPROPERTY()
 	int32 CurrentInterview = 0;
+	UPROPERTY()
+	bool Tutorial = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ABooAndBreakfastCharacter* PlayerCharacter;	
 

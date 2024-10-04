@@ -40,7 +40,7 @@ void AIntroduction::RepeatWithNothingToRepeat()
 
 void AIntroduction::SelectInterview()
 {
-	WhichInterview = FMath::RandRange(1,2);
+	WhichInterview = FMath::RandRange(1,3);
 }
 
 void AIntroduction::OnInterview_Implementation()
