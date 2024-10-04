@@ -69,7 +69,7 @@ public:
 	UPROPERTY()
 	bool Day = true;
 	UFUNCTION()
-	void SetDay(bool Day);
+	void SetDay(bool NewDay);
 
 };
 
