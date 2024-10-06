@@ -132,11 +132,18 @@ void ABooAndBreakfastCharacter::Proceed()
 	}
 }
 
+void ABooAndBreakfastCharacter::LayTrap()
+{
+	if(!Day)
+	{
+		OnLayTrap();
+	}
+}
+
 void ABooAndBreakfastCharacter::SetDay(bool NewDay)
 {
 	Day = NewDay;
 }
-
 
 void ABooAndBreakfastCharacter::Move(const FInputActionValue& Value)
 {
@@ -165,6 +172,34 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 		{
 			FRotator R = GetActorRotation();
 			FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
+			// if(LookAxisVector.X >= 0)
+			// {
+			// 	if(GetActorRotation().Yaw < MaxYaw)
+			// 	{
+			// 		AddControllerYawInput(LookAxisVector.X);
+			// 	}
+			// }
+			// if(LookAxisVector.X < 0)
+			// {
+			// 	if(GetActorRotation().Yaw > MinYaw)
+			// 	{
+			// 		AddControllerYawInput(LookAxisVector.X);
+			// 	}
+			// }
+			// if(LookAxisVector.Y >= 0)
+			// {
+			// 	if(C.Pitch < MaxPitch)
+			// 	{
+			// 		AddControllerPitchInput(LookAxisVector.Y);
+			// 	}
+			// }
+			// if(LookAxisVector.Y < 0)
+			// {
+			// 	if(C.Pitch > MinPitch)
+			// 	{
+			// 		AddControllerPitchInput(LookAxisVector.Y);
+			// 	}
+			// }
 			if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
 			{
 				AddControllerYawInput(LookAxisVector.X);
@@ -173,13 +208,9 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 			{
 				AddControllerPitchInput(LookAxisVector.Y);
 			}
-			// UE_LOG(LogTemp, Display, TEXT("C Yaw:%f, N Yaw: %f"), R.Yaw, LookAxisVector.X);
-			// Fixar koden till look som inte fungerar
 			// if(GetActorRotation().Yaw >MaxYaw) 
 			// {
-			//     UE_LOG(LogTemp, Display, TEXT("C Yaw:%f"), R.Yaw);
 			//     R.Yaw = MaxYaw;
-			//     UE_LOG(LogTemp, Display, TEXT("New Yaw:%f"), R.Yaw);
 			//     GetParentActor()->SetActorRotation(R);
 			// }
 			// if(GetActorRotation().Yaw < MinYaw)

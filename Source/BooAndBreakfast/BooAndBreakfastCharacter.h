@@ -86,6 +86,10 @@ public:
 	UFUNCTION()
 	void Proceed();
 	UFUNCTION()
+	void LayTrap();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnLayTrap();
+	UFUNCTION()
 	void SetDay(bool NewDay);
 private:
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
