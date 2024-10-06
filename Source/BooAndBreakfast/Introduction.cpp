@@ -30,7 +30,17 @@ void AIntroduction::Tick(float DeltaTime)
 }
 void AIntroduction::RepeatLastInterview()
 {
-	UGameplayStatics::PlaySound2D(this, Interviews[InterviewSelector]);
+	if(FirstInterview)
+	{
+		RepeatWithNothingToRepeat();
+		return;
+	}
+	if(Tutorial)
+	{
+		UGameplayStatics::PlaySound2D(this, Interviews[TutorialSelector]);
+		return;
+	}// could break
+	UGameplayStatics::PlaySound2D(this, Interviews[WhichInterview * 4 + InterviewSelector]);
 }
 
 void AIntroduction::RepeatWithNothingToRepeat()
@@ -45,25 +55,25 @@ void AIntroduction::SelectInterview()
 
 void AIntroduction::OnInterview_Implementation()
 {
+	FirstInterview = false;
+	if(TutorialSelector >= 3)
+	{
+		Tutorial = false;
+	}
 	if(Tutorial)
 	{
-		UGameplayStatics::PlaySound2D(this, Interviews[InterviewSelector++]);
-		if(InterviewSelector >= 3)
-		{
-			Tutorial = false;
-			InterviewSelector = 1;
-		}
+		UGameplayStatics::PlaySound2D(this, Interviews[++TutorialSelector]);
 		return;
 	}
-	if(InterviewSelector >= 4)
+	if(InterviewSelector >= 3)
 	{
 		SelectInterview();
-		InterviewSelector = 1;
+		InterviewSelector = -1;
 		if(CurrentInterview++ >= NumberOfInterviews)
 		{
-			PlayerCharacter->SetDay(false);
+			PlayerCharacter->SwitchToNight();
 		}
 	}
-	UGameplayStatics::PlaySound2D(this, Interviews[InterviewSelector++ * WhichInterview]);
+	UGameplayStatics::PlaySound2D(this, Interviews[WhichInterview * 4 + ++InterviewSelector]);
 }
 

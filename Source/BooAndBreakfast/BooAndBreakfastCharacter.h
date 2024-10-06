@@ -72,8 +72,6 @@ public:
 	int MaxPitch;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	int MinPitch;
-	UPROPERTY()
-	bool FirstInterview = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AIntroduction* Introduction;
 	UPROPERTY(EditAnywhere)
@@ -81,6 +79,10 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<FRotator> RotationsToTeleportTo;
 	
+	UFUNCTION()
+	void SwitchToNight();
+	UFUNCTION()
+	void SwitchToDay();
 	UFUNCTION()
 	void Repeat();
 	UFUNCTION()

@@ -58,7 +58,7 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Look);
 		EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
 		EnhancedInputComponent->BindAction(ProceedAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Proceed);
-		EnhancedInputComponent->BindAction(LayTrapAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Proceed);
+		EnhancedInputComponent->BindAction(LayTrapAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::LayTrap);
 	}
 	else
 	{
@@ -69,11 +69,6 @@ void ABooAndBreakfastCharacter::Repeat()
 {
 	if(Day)
 	{
-		if(FirstInterview)
-		{
-			Introduction->RepeatWithNothingToRepeat();
-			return;
-		}
 		Introduction->RepeatLastInterview();
 	}
 	else
@@ -98,17 +93,8 @@ void ABooAndBreakfastCharacter::Repeat()
 }
 void ABooAndBreakfastCharacter::Proceed()
 {
-	if(Day)// Logik ligger ockso i introduction
+	if(Day)
 	{
-		if(CurrentCount >= CountToProceed)// Byt till natt
-		{
-			Day = false;
-			CurrentCount = 0;
-			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
-			return;
-		}
-		CurrentCount++;
-		FirstInterview = false;
 		Introduction->OnInterview();
 	}
 	else
@@ -143,6 +129,19 @@ void ABooAndBreakfastCharacter::LayTrap()
 void ABooAndBreakfastCharacter::SetDay(bool NewDay)
 {
 	Day = NewDay;
+}
+
+void ABooAndBreakfastCharacter::SwitchToNight()
+{
+	SetDay(false);
+	CurrentRoom = 0;
+	TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
+}
+
+void ABooAndBreakfastCharacter::SwitchToDay()
+{
+	SetDay(true);
+	TeleportTo(PositionsToTeleportTo[3], RotationsToTeleportTo[3]);
 }
 
 void ABooAndBreakfastCharacter::Move(const FInputActionValue& Value)
