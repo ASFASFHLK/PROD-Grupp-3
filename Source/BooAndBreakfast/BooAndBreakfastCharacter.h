@@ -40,7 +40,7 @@ class ABooAndBreakfastCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* SelectRoomAction;
+	UInputAction* LayTrapAction;
 	
 public:
 	ABooAndBreakfastCharacter();
