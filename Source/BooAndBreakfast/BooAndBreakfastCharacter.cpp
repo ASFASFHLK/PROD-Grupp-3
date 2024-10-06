@@ -172,42 +172,42 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 		{
 			FRotator R = GetActorRotation();
 			FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
-			// if(LookAxisVector.X >= 0)
-			// {
-			// 	if(GetActorRotation().Yaw < MaxYaw)
-			// 	{
-			// 		AddControllerYawInput(LookAxisVector.X);
-			// 	}
-			// }
-			// if(LookAxisVector.X < 0)
-			// {
-			// 	if(GetActorRotation().Yaw > MinYaw)
-			// 	{
-			// 		AddControllerYawInput(LookAxisVector.X);
-			// 	}
-			// }
-			// if(LookAxisVector.Y >= 0)
-			// {
-			// 	if(C.Pitch < MaxPitch)
-			// 	{
-			// 		AddControllerPitchInput(LookAxisVector.Y);
-			// 	}
-			// }
-			// if(LookAxisVector.Y < 0)
-			// {
-			// 	if(C.Pitch > MinPitch)
-			// 	{
-			// 		AddControllerPitchInput(LookAxisVector.Y);
-			// 	}
-			// }
-			if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
+			if(LookAxisVector.X >= 0)
 			{
-				AddControllerYawInput(LookAxisVector.X);
+				if(GetActorRotation().Yaw < MaxYaw)
+				{
+					AddControllerYawInput(LookAxisVector.X);
+				}
 			}
-			if(C.Pitch + LookAxisVector.Y <= MaxPitch && C.Pitch + LookAxisVector.X >= MinPitch)
+			if(LookAxisVector.X < 0)
 			{
-				AddControllerPitchInput(LookAxisVector.Y);
+				if(GetActorRotation().Yaw > MinYaw)
+				{
+					AddControllerYawInput(LookAxisVector.X);
+				}
 			}
+			if(LookAxisVector.Y >= 0)
+			{
+				if(C.Pitch < MaxPitch)
+				{
+					AddControllerPitchInput(-LookAxisVector.Y);
+				}
+			}
+			if(LookAxisVector.Y < 0)
+			{
+				if(C.Pitch > MinPitch)
+				{
+					AddControllerPitchInput(-LookAxisVector.Y);
+				}
+			}
+			// if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
+			// {
+			// 	AddControllerYawInput(LookAxisVector.X);
+			// }
+			// if(C.Pitch + LookAxisVector.Y <= MaxPitch && C.Pitch + LookAxisVector.X >= MinPitch)
+			// {
+			// 	AddControllerPitchInput(LookAxisVector.Y);
+			// }
 			// if(GetActorRotation().Yaw >MaxYaw) 
 			// {
 			//     R.Yaw = MaxYaw;
