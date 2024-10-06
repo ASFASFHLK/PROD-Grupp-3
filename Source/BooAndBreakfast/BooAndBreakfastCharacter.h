@@ -79,9 +79,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<FRotator> RotationsToTeleportTo;
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
 	void SwitchToNight();
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
 	void SwitchToDay();
 	UFUNCTION()
 	void Repeat();
