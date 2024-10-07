@@ -40,7 +40,7 @@ class ABooAndBreakfastCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* SelectRoomAction;
+	UInputAction* LayTrapAction;
 	
 public:
 	ABooAndBreakfastCharacter();
@@ -72,8 +72,6 @@ public:
 	int MaxPitch;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	int MinPitch;
-	UPROPERTY()
-	bool FirstInterview = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AIntroduction* Introduction;
 	UPROPERTY(EditAnywhere)
@@ -81,10 +79,18 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<FRotator> RotationsToTeleportTo;
 	
+	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
+	void SwitchToNight();
+	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
+	void SwitchToDay();
 	UFUNCTION()
 	void Repeat();
 	UFUNCTION()
 	void Proceed();
+	UFUNCTION()
+	void LayTrap();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnLayTrap();
 	UFUNCTION()
 	void SetDay(bool NewDay);
 private:

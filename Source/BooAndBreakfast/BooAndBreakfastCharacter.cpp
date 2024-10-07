@@ -58,6 +58,7 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Look);
 		EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
 		EnhancedInputComponent->BindAction(ProceedAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Proceed);
+		EnhancedInputComponent->BindAction(LayTrapAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::LayTrap);
 	}
 	else
 	{
@@ -68,11 +69,6 @@ void ABooAndBreakfastCharacter::Repeat()
 {
 	if(Day)
 	{
-		if(FirstInterview)
-		{
-			Introduction->RepeatWithNothingToRepeat();
-			return;
-		}
 		Introduction->RepeatLastInterview();
 	}
 	else
@@ -97,17 +93,8 @@ void ABooAndBreakfastCharacter::Repeat()
 }
 void ABooAndBreakfastCharacter::Proceed()
 {
-	if(Day)// Logik ligger ockso i introduction
+	if(Day)
 	{
-		if(CurrentCount >= CountToProceed)// Byt till natt
-		{
-			Day = false;
-			CurrentCount = 0;
-			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
-			return;
-		}
-		CurrentCount++;
-		FirstInterview = false;
 		Introduction->OnInterview();
 	}
 	else
@@ -131,11 +118,31 @@ void ABooAndBreakfastCharacter::Proceed()
 	}
 }
 
+void ABooAndBreakfastCharacter::LayTrap()
+{
+	if(!Day)
+	{
+		OnLayTrap();
+	}
+}
+
 void ABooAndBreakfastCharacter::SetDay(bool NewDay)
 {
 	Day = NewDay;
 }
 
+void ABooAndBreakfastCharacter::SwitchToNight()
+{
+	SetDay(false);
+	CurrentRoom = 0;
+	TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
+}
+
+void ABooAndBreakfastCharacter::SwitchToDay()
+{
+	SetDay(true);
+	TeleportTo(PositionsToTeleportTo[3], RotationsToTeleportTo[3]);
+}
 
 void ABooAndBreakfastCharacter::Move(const FInputActionValue& Value)
 {
@@ -164,21 +171,45 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 		{
 			FRotator R = GetActorRotation();
 			FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
-			if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
+			if(LookAxisVector.X >= 0)
 			{
-				AddControllerYawInput(LookAxisVector.X);
+				if(GetActorRotation().Yaw < MaxYaw)
+				{
+					AddControllerYawInput(LookAxisVector.X);
+				}
 			}
-			if(C.Pitch + LookAxisVector.Y <= MaxPitch && C.Pitch + LookAxisVector.X >= MinPitch)
+			if(LookAxisVector.X < 0)
 			{
-				AddControllerPitchInput(LookAxisVector.Y);
+				if(GetActorRotation().Yaw > MinYaw)
+				{
+					AddControllerYawInput(LookAxisVector.X);
+				}
 			}
-			// UE_LOG(LogTemp, Display, TEXT("C Yaw:%f, N Yaw: %f"), R.Yaw, LookAxisVector.X);
-			// Fixar koden till look som inte fungerar
+			if(LookAxisVector.Y >= 0)
+			{
+				if(C.Pitch < MaxPitch)
+				{
+					AddControllerPitchInput(-LookAxisVector.Y);
+				}
+			}
+			if(LookAxisVector.Y < 0)
+			{
+				if(C.Pitch > MinPitch)
+				{
+					AddControllerPitchInput(-LookAxisVector.Y);
+				}
+			}
+			// if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
+			// {
+			// 	AddControllerYawInput(LookAxisVector.X);
+			// }
+			// if(C.Pitch + LookAxisVector.Y <= MaxPitch && C.Pitch + LookAxisVector.X >= MinPitch)
+			// {
+			// 	AddControllerPitchInput(LookAxisVector.Y);
+			// }
 			// if(GetActorRotation().Yaw >MaxYaw) 
 			// {
-			//     UE_LOG(LogTemp, Display, TEXT("C Yaw:%f"), R.Yaw);
 			//     R.Yaw = MaxYaw;
-			//     UE_LOG(LogTemp, Display, TEXT("New Yaw:%f"), R.Yaw);
 			//     GetParentActor()->SetActorRotation(R);
 			// }
 			// if(GetActorRotation().Yaw < MinYaw)

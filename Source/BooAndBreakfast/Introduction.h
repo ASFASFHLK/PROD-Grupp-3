@@ -39,15 +39,19 @@ public:
 	UPROPERTY()
 	AActor* Player;
 	UPROPERTY()
-	int32 InterviewSelector = 0;
+	int32 InterviewSelector = -1;
+	UPROPERTY()
+	int32 TutorialSelector = -1;
 	UPROPERTY()
 	int32 WhichInterview;
 	UPROPERTY()
-	int32 NumberOfInterviews = 2;
+	int32 NumberOfInterviews = 1;
 	UPROPERTY()
 	int32 CurrentInterview = 0;
 	UPROPERTY()
 	bool Tutorial = true;
+	UPROPERTY()
+	bool FirstInterview = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ABooAndBreakfastCharacter* PlayerCharacter;	
 
