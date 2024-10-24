@@ -28,14 +28,26 @@ public:
 	void OnInterview();
 	UFUNCTION()
 	void RepeatLastInterview();
+	// UFUNCTION()
+	// void RepeatWithNothingToRepeat();
+	// UFUNCTION()
+	// void SelectInterview();
 	UFUNCTION()
-	void RepeatWithNothingToRepeat();
-	UFUNCTION()
-	void SelectInterview();
+	void OnBeginDay();
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USoundWave* NothingToRepeat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundWave* BossIntroduction;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<USoundWave*> Interviews;
+	
+private:
+	
+	UPROPERTY()
+	FTimerHandle StartTimer;
+	UPROPERTY()
+	UAudioComponent* BossAudio;
 	UPROPERTY()
 	AActor* Player;
 	UPROPERTY()
@@ -52,7 +64,7 @@ public:
 	bool Tutorial = true;
 	UPROPERTY()
 	bool FirstInterview = true;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY()
 	ABooAndBreakfastCharacter* PlayerCharacter;	
 
 };
