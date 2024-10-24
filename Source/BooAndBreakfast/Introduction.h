@@ -45,6 +45,8 @@ public:
 	// TArray<USoundWave*> Interviews;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<USoundWave*> BossResponses;
+	UPROPERTY()
+	ABooAndBreakfastCharacter* PlayerCharacter;
 	
 private:
 	
@@ -68,8 +70,6 @@ private:
 	bool Tutorial = true;
 	UPROPERTY()
 	bool FirstInterview = true;
-	UPROPERTY()
-	ABooAndBreakfastCharacter* PlayerCharacter;
 	UPROPERTY()
 	int32 BossResponse = 0;
 		
