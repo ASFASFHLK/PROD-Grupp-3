@@ -30,12 +30,30 @@ void AIntroduction::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-void AIntroduction::RepeatLastInterview()
+
+void AIntroduction::OnSwitchToNight_Implementation()
 {
 	if(BossAudio)
 	{
 		BossAudio->Stop();
-		BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
+	}
+	BossResponse = FMath::RandRange(0,3);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
+}
+
+void AIntroduction::RepeatLastInterview()
+{
+	if(BossAudio)
+	{
+		if(Tutorial)
+		{
+			BossAudio->Stop();
+			BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
+		}
+		else
+		{
+			BossAudio = UGameplayStatics::SpawnSound2D(this, BossResponses[BossResponse], 1,1, 0);
+		}
 	}
 }
 void AIntroduction::OnBeginDay()
@@ -49,9 +67,10 @@ void AIntroduction::OnInterview_Implementation()
 		GetWorldTimerManager().ClearTimer(StartTimer);
 	}
 	if(BossAudio)
- 	{
- 		BossAudio->Stop();
- 	}
+	{
+		BossAudio->Stop();
+	}
+	Tutorial = false;
 	PlayerCharacter->SwitchToNight();
 }
 

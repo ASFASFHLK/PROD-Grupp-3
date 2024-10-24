@@ -25,7 +25,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION(BlueprintNativeEvent)
-	void OnInterview();
+	void OnSwitchToNight();
+	UFUNCTION(BlueprintNativeEvent)
+   	void OnInterview();
 	UFUNCTION()
 	void RepeatLastInterview();
 	// UFUNCTION()
@@ -39,8 +41,10 @@ public:
 	USoundWave* NothingToRepeat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USoundWave* BossIntroduction;
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// TArray<USoundWave*> Interviews;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<USoundWave*> Interviews;
+	TArray<USoundWave*> BossResponses;
 	
 private:
 	
@@ -65,6 +69,8 @@ private:
 	UPROPERTY()
 	bool FirstInterview = true;
 	UPROPERTY()
-	ABooAndBreakfastCharacter* PlayerCharacter;	
-
+	ABooAndBreakfastCharacter* PlayerCharacter;
+	UPROPERTY()
+	int32 BossResponse = 0;
+		
 };
