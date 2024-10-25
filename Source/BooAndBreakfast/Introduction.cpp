@@ -38,7 +38,7 @@ void AIntroduction::OnSwitchToNight_Implementation()
 		BossAudio->Stop();
 	}
 	BossResponse = FMath::RandRange(0,3);
-	BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, BossResponses[BossResponse], 1,1, 0);
 }
 
 void AIntroduction::RepeatLastInterview()
@@ -60,6 +60,17 @@ void AIntroduction::OnBeginDay()
 {
 	BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
 }
+
+void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
+{
+	if(BossAudio)
+	{
+		BossAudio->Stop();
+	}
+	int32 BossResponseTemp = FMath::RandRange(0, Sounds.Num() - 1);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[BossResponseTemp], 1,1, 0);
+}
+
 void AIntroduction::OnInterview_Implementation()
 {
 	if(GetWorldTimerManager().TimerExists(StartTimer))

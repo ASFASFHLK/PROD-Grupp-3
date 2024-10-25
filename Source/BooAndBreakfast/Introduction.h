@@ -36,6 +36,8 @@ public:
 	// void SelectInterview();
 	UFUNCTION()
 	void OnBeginDay();
+	UFUNCTION(BlueprintCallable)
+	void PlaySound(TArray<USoundWave*> Sounds);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USoundWave* NothingToRepeat;
@@ -45,15 +47,15 @@ public:
 	// TArray<USoundWave*> Interviews;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<USoundWave*> BossResponses;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ABooAndBreakfastCharacter* PlayerCharacter;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAudioComponent* BossAudio;
 	
 private:
 	
 	UPROPERTY()
 	FTimerHandle StartTimer;
-	UPROPERTY()
-	UAudioComponent* BossAudio;
 	UPROPERTY()
 	AActor* Player;
 	UPROPERTY()
