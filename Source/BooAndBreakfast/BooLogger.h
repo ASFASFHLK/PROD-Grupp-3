@@ -18,9 +18,16 @@ public:
 
 	UFUNCTION()
 	void Log();
+	UFUNCTION()
+	void StartLog();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	UFUNCTION()
+	void StartingLogs();
+	UFUNCTION()
+	void SingleLogEntry(FString Text);
 
 };

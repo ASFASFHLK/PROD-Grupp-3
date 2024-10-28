@@ -2,6 +2,7 @@
 
 
 #include "BooLogger.h"
+#include <chrono>
 
 // Sets default values
 ABooLogger::ABooLogger()
@@ -17,7 +18,46 @@ void ABooLogger::BeginPlay()
 	Super::BeginPlay();
 	
 	FTimerHandle StartTimer;
-	GetWorldTimerManager().SetTimer(StartTimer, this, &ABooLogger::Log, 2.0f);
+	GetWorldTimerManager().SetTimer(StartTimer, this, &ABooLogger::StartingLogs, 2.0f);
+}
+
+void ABooLogger::StartingLogs()
+{
+	SingleLogEntry("Starting new game-------------------");
+}
+
+void ABooLogger::SingleLogEntry(FString Text)
+{
+	FString File = FPaths::ProjectConfigDir();
+	File.Append(TEXT("ActionLog.txt"));
+	IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
+	auto end = std::chrono::system_clock::now();
+
+	
+	std::time_t EndTime = std::chrono::system_clock::to_time_t(end);
+	char* Temp = std::ctime(&EndTime);
+	FString TimeString(Temp);
+	FString FileContent;
+	
+	if (FileManager.FileExists(*File))
+	{
+		// We use the LoadFileToString to load the file into
+		if(!FFileHelper::LoadFileToString(FileContent,*File,FFileHelper::EHashOptions::None))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Did not load text from file"));
+			return;
+		}	
+		FString TextToSave = FileContent + "#" + Text + ", Date: " + TimeString;
+		if(!FFileHelper::SaveStringToFile(TextToSave,*File))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Failed to write FString to file."));
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: ERROR: Can not read the file because it was not found."));
+		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Expected file location: %s"),*File);
+	}	
 }
 
 // Called every frame
@@ -48,5 +88,26 @@ void ABooLogger::Log()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("File not loaded at %s"), *File);
 	}
+}
+
+void ABooLogger::StartLog()
+{
+	FString File = FPaths::ProjectConfigDir();
+	File.Append(TEXT("MyConfig.txt"));
+	IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
+	FString StringToWrite(TEXT("Hello World. Written from Unreal Engine 4"));
+	if (FileManager.FileExists(*File))
+	{
+		// We use the LoadFileToString to load the file into
+		if(!FFileHelper::SaveStringToFile(StringToWrite,*File))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Failed to write FString to file."));
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: ERROR: Can not read the file because it was not found."));
+		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Expected file location: %s"),*File);
+	}	
 }
 
