@@ -159,12 +159,14 @@ void ABooAndBreakfastCharacter::SwitchToNight()
 {
 	SetDay(false);
 	CurrentRoom = 0;
-	// FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
-	// float CPitchInput = -C.Pitch;
+	FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
+	float CPitchInput = -C.Pitch;
 	// UE_LOG(LogTemp, Display, TEXT("Pitch before = %f, PitchInput = %f"), C.Pitch, CPitchInput);
 	// AddControllerPitchInput(CPitchInput);
 	// float CPitchT = GetFirstPersonCameraComponent()->GetComponentTransform().Rotator().Pitch;
 	// UE_LOG(LogTemp, Display, TEXT("Pitch after = %f, PitchInput = %f"), C.Pitch, CPitchInput);
+	// FRotator TempRotator = RotationsToTeleportTo[0];
+	// TempRotator.Pitch = CPitchInput;
 	TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
 }
 
