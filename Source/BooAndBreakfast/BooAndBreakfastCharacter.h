@@ -33,14 +33,20 @@ class ABooAndBreakfastCharacter : public ACharacter
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* ProceedAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* RepeatAction;
+	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	// UInputAction* RepeatAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LayTrapAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* Teleport1Action;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* Teleport2Action;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* Teleport3Action;
 	
 public:
 	ABooAndBreakfastCharacter();
@@ -59,6 +65,27 @@ protected:
 	// End of APawn interface
 
 public:
+	
+	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
+	void SwitchToNight();
+	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
+	void SwitchToDay();
+	UFUNCTION()
+	void Repeat();
+	UFUNCTION()
+	void Proceed();
+	UFUNCTION()
+	void LayTrap();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnLayTrap();
+	UFUNCTION()
+	void SetDay(bool NewDay);
+	UFUNCTION()
+	void TeleportOne();
+	UFUNCTION()
+	void TeleportTwo();
+	UFUNCTION()
+	void TeleportThree();
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
@@ -79,20 +106,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<FRotator> RotationsToTeleportTo;
 	
-	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
-	void SwitchToNight();
-	UFUNCTION(BlueprintCallable, Category = DayNightCycle)
-	void SwitchToDay();
-	UFUNCTION()
-	void Repeat();
-	UFUNCTION()
-	void Proceed();
-	UFUNCTION()
-	void LayTrap();
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnLayTrap();
-	UFUNCTION()
-	void SetDay(bool NewDay);
 private:
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	bool Day = true;

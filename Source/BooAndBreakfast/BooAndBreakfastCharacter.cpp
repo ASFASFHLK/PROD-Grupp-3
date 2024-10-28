@@ -56,9 +56,12 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Look);
-		EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
+		// EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
 		EnhancedInputComponent->BindAction(ProceedAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Proceed);
 		EnhancedInputComponent->BindAction(LayTrapAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::LayTrap);
+		EnhancedInputComponent->BindAction(Teleport1Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportOne);
+		EnhancedInputComponent->BindAction(Teleport2Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportTwo);
+		EnhancedInputComponent->BindAction(Teleport3Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportThree);
 	}
 	else
 	{
@@ -97,25 +100,25 @@ void ABooAndBreakfastCharacter::Proceed()
 	{
 		Introduction->OnInterview();
 	}
-	else
-	{
-		switch (CurrentRoom)
-		{
-		case 0:
-			++CurrentRoom;
-			TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
-			break;
-		case 1:
-			++CurrentRoom;
-			TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
-			break;
-		case 2:
-			CurrentRoom = 0;
-			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
-			break;
-		default: ;
-		}
-	}
+	// else
+	// {
+	// 	switch (CurrentRoom)
+	// 	{
+	// 	case 0:
+	// 		++CurrentRoom;
+	// 		TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
+	// 		break;
+	// 	case 1:
+	// 		++CurrentRoom;
+	// 		TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
+	// 		break;
+	// 	case 2:
+	// 		CurrentRoom = 0;
+	// 		TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
+	// 		break;
+	// 	default: ;
+	// 	}
+	// }
 }
 
 void ABooAndBreakfastCharacter::LayTrap()
@@ -131,10 +134,37 @@ void ABooAndBreakfastCharacter::SetDay(bool NewDay)
 	Day = NewDay;
 }
 
+void ABooAndBreakfastCharacter::TeleportOne()
+{	if(!Day)
+ 	{
+		TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
+ 	}
+}
+
+void ABooAndBreakfastCharacter::TeleportTwo()
+{	if(!Day)
+ 	{
+		TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
+ 	}
+}
+
+void ABooAndBreakfastCharacter::TeleportThree()
+{	if(!Day)
+ 	{
+		TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
+ 	}
+}
+
 void ABooAndBreakfastCharacter::SwitchToNight()
 {
 	SetDay(false);
 	CurrentRoom = 0;
+	// FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
+	// float CPitchInput = -C.Pitch;
+	// UE_LOG(LogTemp, Display, TEXT("Pitch before = %f, PitchInput = %f"), C.Pitch, CPitchInput);
+	// AddControllerPitchInput(CPitchInput);
+	// float CPitchT = GetFirstPersonCameraComponent()->GetComponentTransform().Rotator().Pitch;
+	// UE_LOG(LogTemp, Display, TEXT("Pitch after = %f, PitchInput = %f"), C.Pitch, CPitchInput);
 	TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
 }
 
@@ -169,7 +199,6 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 	{
 		if(Day)
 		{
-			FRotator R = GetActorRotation();
 			FRotator C = GetFirstPersonCameraComponent()->GetComponentRotation();
 			if(LookAxisVector.X >= 0)
 			{
