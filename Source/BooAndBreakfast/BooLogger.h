@@ -17,9 +17,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION()
-	void Log();
-	UFUNCTION()
 	void StartLog();
+	UFUNCTION()
+	void SingleLogEntry(FString Text);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -27,7 +27,5 @@ protected:
 private:
 	UFUNCTION()
 	void StartingLogs();
-	UFUNCTION()
-	void SingleLogEntry(FString Text);
 
 };

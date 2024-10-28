@@ -31,7 +31,7 @@ void ABooLogger::SingleLogEntry(FString Text)
 	FString File = FPaths::ProjectConfigDir();
 	File.Append(TEXT("ActionLog.txt"));
 	IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
-	auto end = std::chrono::system_clock::now();
+	std::chrono::time_point end = std::chrono::system_clock::now();
 
 	
 	std::time_t EndTime = std::chrono::system_clock::to_time_t(end);
@@ -65,29 +65,6 @@ void ABooLogger::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
-
-void ABooLogger::Log()
-{
-	FString File = FPaths::ProjectConfigDir();
-	File.Append(TEXT("ActionLog.txt"));
-	IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
-	FString FileContent;
-	if(FileManager.FileExists(*File))
-	{
-		if(FFileHelper::LoadFileToString(FileContent, *File, FFileHelper::EHashOptions::None))
-		{
-			UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Text from File: %s"), *FileContent);
-		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Failed to load text from file"));
-		}
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("File not loaded at %s"), *File);
-	}
 }
 
 void ABooLogger::StartLog()
