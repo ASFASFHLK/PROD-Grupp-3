@@ -1,2 +1,10 @@
-#Starting new game-------------------, Date: Mon Oct 28 21:26:11 2024
-#Starting new game-------------------, Date: Mon Oct 28 21:26:23 2024
+
+#Starting new game-------------------, Date: Mon Oct 28 22:52:35 2024
+#Start Game, Date: Mon Oct 28 22:52:47 2024
+#Teleport to Room: 2, Date: Mon Oct 28 22:53:21 2024
+#Teleport to Room: 1, Date: Mon Oct 28 22:53:22 2024
+#Teleport to Room: 2, Date: Mon Oct 28 22:53:23 2024
+#Teleport to Room: 3, Date: Mon Oct 28 22:53:31 2024
+#Won Round, Date: Mon Oct 28 22:53:53 2024
+#Won Round, Date: Mon Oct 28 22:54:32 2024
+#Lost Round, Date: Mon Oct 28 22:54:57 2024

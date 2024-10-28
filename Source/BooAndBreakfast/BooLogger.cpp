@@ -60,12 +60,6 @@ void ABooLogger::SingleLogEntry(FString Text)
 	}	
 }
 
-// Called every frame
-void ABooLogger::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 
 void ABooLogger::StartLog()
 {

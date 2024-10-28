@@ -137,6 +137,7 @@ void ABooAndBreakfastCharacter::SetDay(bool NewDay)
 void ABooAndBreakfastCharacter::TeleportOne()
 {	if(!Day)
  	{
+		OnTeleported(1);
 		TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
  	}
 }
@@ -144,6 +145,7 @@ void ABooAndBreakfastCharacter::TeleportOne()
 void ABooAndBreakfastCharacter::TeleportTwo()
 {	if(!Day)
  	{
+		OnTeleported(2);
 		TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
  	}
 }
@@ -151,6 +153,7 @@ void ABooAndBreakfastCharacter::TeleportTwo()
 void ABooAndBreakfastCharacter::TeleportThree()
 {	if(!Day)
  	{
+		OnTeleported(3);
 		TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
  	}
 }

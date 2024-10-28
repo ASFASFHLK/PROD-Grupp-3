@@ -80,12 +80,8 @@ public:
 	void OnLayTrap();
 	UFUNCTION()
 	void SetDay(bool NewDay);
-	UFUNCTION()
-	void TeleportOne();
-	UFUNCTION()
-	void TeleportTwo();
-	UFUNCTION()
-	void TeleportThree();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnTeleported(int Room);
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
@@ -107,6 +103,12 @@ public:
 	TArray<FRotator> RotationsToTeleportTo;
 	
 private:
+	UFUNCTION()
+	void TeleportOne();
+	UFUNCTION()
+	void TeleportTwo();
+	UFUNCTION()
+	void TeleportThree();
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	bool Day = true;
 	UPROPERTY()
