@@ -16,6 +16,8 @@ void ABooLogger::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	FTimerHandle StartTimer;
+	GetWorldTimerManager().SetTimer(StartTimer, this, &ABooLogger::Log, 2.0f);
 }
 
 // Called every frame
