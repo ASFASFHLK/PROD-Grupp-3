@@ -3,3 +3,24 @@
 #Sonar Activated, Date: Tue Oct 29 14:21:21 2024
 #Sonar Activated, Date: Tue Oct 29 14:21:22 2024
 #Sonar Activated, Date: Tue Oct 29 14:21:23 2024
+#Diffculty selected: 1, Date: Tue Oct 29 16:46:25 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:02:41 2024
+#Sonar Activated, Date: Tue Oct 29 17:02:42 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:03:21 2024
+#Sonar Activated, Date: Tue Oct 29 17:03:21 2024
+#Sonar Activated, Date: Tue Oct 29 17:03:21 2024
+#Sonar Activated, Date: Tue Oct 29 17:03:24 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:10:54 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:12:12 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:12:32 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:14:24 2024
+#Starting new game-------------------, Date: Tue Oct 29 17:14:58 2024
+#Start Game, Date: Tue Oct 29 17:15:06 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:15:06 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:17:06 2024
+#Starting new game-------------------, Date: Tue Oct 29 17:17:29 2024
+#Diffculty selected: 1, Date: Tue Oct 29 17:20:48 2024
+#Sonar Activated, Date: Tue Oct 29 17:20:51 2024
+#Sonar Activated, Date: Tue Oct 29 17:20:52 2024
+#Sonar Activated, Date: Tue Oct 29 17:20:52 2024
+#Starting new game-------------------, Date: Tue Oct 29 17:21:01 2024
