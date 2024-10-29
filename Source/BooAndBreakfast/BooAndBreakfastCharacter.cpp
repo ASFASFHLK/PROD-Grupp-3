@@ -219,20 +219,20 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 					AddControllerYawInput(LookAxisVector.X);
 				}
 			}
-			if(LookAxisVector.Y >= 0)
-			{
-				if(C.Pitch < MaxPitch)
-				{
-					AddControllerPitchInput(-LookAxisVector.Y);
-				}
-			}
-			if(LookAxisVector.Y < 0)
-			{
-				if(C.Pitch > MinPitch)
-				{
-					AddControllerPitchInput(-LookAxisVector.Y);
-				}
-			}
+			// if(LookAxisVector.Y >= 0)
+			// {
+			// 	if(C.Pitch < MaxPitch)
+			// 	{
+			// 		AddControllerPitchInput(-LookAxisVector.Y);
+			// 	}
+			// }
+			// if(LookAxisVector.Y < 0)
+			// {
+			// 	if(C.Pitch > MinPitch)
+			// 	{
+			// 		AddControllerPitchInput(-LookAxisVector.Y);
+			// 	}
+			// }
 			// if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
 			// {
 			// 	AddControllerYawInput(LookAxisVector.X);
