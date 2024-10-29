@@ -15,3 +15,9 @@
 #Teleport to Room: 1, Date: Tue Oct 29 12:56:05 2024
 #Teleport to Room: 2, Date: Tue Oct 29 12:56:12 2024
 #Won Round, Date: Tue Oct 29 12:56:30 2024
+#Diffculty selected: 1, Date: Tue Oct 29 13:09:25 2024
+#Teleport to Room: 2, Date: Tue Oct 29 13:09:48 2024
+#Teleport to Room: 3, Date: Tue Oct 29 13:09:51 2024
+#Teleport to Room: 1, Date: Tue Oct 29 13:09:55 2024
+#Diffculty selected: 1, Date: Tue Oct 29 13:10:17 2024
+#Diffculty selected: 1, Date: Tue Oct 29 13:10:48 2024
