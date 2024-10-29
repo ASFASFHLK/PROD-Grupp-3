@@ -3,6 +3,7 @@
 
 #include "BooGameLogger.h"
 #include "chrono"
+#include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
 ABooGameLogger::ABooGameLogger()
@@ -51,6 +52,7 @@ void ABooGameLogger::Log(FString Text)
  	{
  		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: ERROR: Can not read the file because it was not found."));
  		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Expected file location: %s"),*File);
+ 		UKismetSystemLibrary::PrintString(this, *File, true); 
  	}
 }
 
