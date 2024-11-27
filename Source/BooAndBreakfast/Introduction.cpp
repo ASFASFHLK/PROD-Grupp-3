@@ -99,14 +99,14 @@ void AIntroduction::RepeatLastInterview()
 	}
 	if(Tutorial)
 	{
-		UGameplayStatics::PlaySound2D(this, Interviews[TutorialSelector]);
+		BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[TutorialSelector]);
 		return;
 	}// could break
-	UGameplayStatics::PlaySound2D(this, Interviews[WhichInterview * 4 + InterviewSelector]);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + InterviewSelector]);
 }
 void AIntroduction::RepeatWithNothingToRepeat()
 {
-	UGameplayStatics::PlaySound2D(this, NothingToRepeat);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, NothingToRepeat);
 }
 
 void AIntroduction::SelectInterview()
@@ -118,6 +118,15 @@ void AIntroduction::SelectInterview()
 
 void AIntroduction::OnInterview_Implementation()
 {
+	if(GetWorldTimerManager().TimerExists(StartTimer))
+	{
+		GetWorldTimerManager().ClearTimer(StartTimer);
+	}
+	if(BossAudio)
+	{
+		BossAudio->Stop();
+	}
+	
 	FirstInterview = false;
 	if(TutorialSelector >= 3)
 	{
@@ -125,7 +134,7 @@ void AIntroduction::OnInterview_Implementation()
 	}
 	if(Tutorial)
 	{
-		UGameplayStatics::PlaySound2D(this, Interviews[++TutorialSelector]);
+		BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[++TutorialSelector]);
 		return;
 	}
 	if(InterviewSelector >= 3)
@@ -137,6 +146,6 @@ void AIntroduction::OnInterview_Implementation()
 			PlayerCharacter->SwitchToNight();
 		}
 	}
-	UGameplayStatics::PlaySound2D(this, Interviews[WhichInterview * 4 + ++InterviewSelector]);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + ++InterviewSelector]);
 }
 
