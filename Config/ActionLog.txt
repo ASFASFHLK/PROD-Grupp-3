@@ -24,3 +24,7 @@
 #Sonar Activated, Date: Tue Oct 29 17:20:52 2024
 #Sonar Activated, Date: Tue Oct 29 17:20:52 2024
 #Starting new game-------------------, Date: Tue Oct 29 17:21:01 2024
+#Diffculty selected: 1, Date: Wed Nov 27 11:24:17 2024
+#Starting new game-------------------, Date: Wed Nov 27 11:24:43 2024
+#Start Game, Date: Wed Nov 27 11:24:45 2024
+#Diffculty selected: 1, Date: Wed Nov 27 11:24:46 2024
