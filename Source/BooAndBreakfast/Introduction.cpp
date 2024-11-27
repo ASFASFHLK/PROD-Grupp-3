@@ -58,7 +58,7 @@ void AIntroduction::OnSwitchToNight_Implementation()
 // }
 void AIntroduction::OnBeginDay()
 {
-	BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
+	// BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
 }
 
 void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
@@ -92,6 +92,11 @@ void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
 
 void AIntroduction::RepeatLastInterview()
 {
+	UE_LOG(LogTemp, Display, TEXT("RepeatLastInterview"));
+	if(BossAudio)
+	{
+		BossAudio->Stop();
+	}
 	if(FirstInterview)
 	{
 		RepeatWithNothingToRepeat();
@@ -118,6 +123,7 @@ void AIntroduction::SelectInterview()
 
 void AIntroduction::OnInterview_Implementation()
 {
+	UE_LOG(LogTemp, Display, TEXT("Interview"));
 	if(GetWorldTimerManager().TimerExists(StartTimer))
 	{
 		GetWorldTimerManager().ClearTimer(StartTimer);
