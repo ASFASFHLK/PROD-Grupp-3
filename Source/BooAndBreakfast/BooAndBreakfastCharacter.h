@@ -105,12 +105,13 @@ public:
 	TArray<FRotator> RotationsToTeleportTo;
 	
 private:
-	UFUNCTION()
 	void TeleportOne();
-	UFUNCTION()
 	void TeleportTwo();
-	UFUNCTION()
 	void TeleportThree();
+	bool TryTutorialInput(int Input);
+	void TutorialProgress();
+	
+	
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	bool Day = true;
 	UPROPERTY()
@@ -123,6 +124,10 @@ private:
 	int RoomToReport = 3;
 	UPROPERTY(VisibleAnywhere)
 	int RoomWithGhost = 0;
+	UPROPERTY()
+	//#ME Add another false
+	TArray<bool> TutorialSections = {true, false, false, false, false, false};
+	
 
 };
 

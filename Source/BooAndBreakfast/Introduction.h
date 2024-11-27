@@ -28,16 +28,15 @@ public:
 	void OnSwitchToNight();
 	UFUNCTION(BlueprintNativeEvent)
    	void OnInterview();
-	UFUNCTION()
 	void RepeatLastInterview();
-	UFUNCTION()
 	void RepeatWithNothingToRepeat();
-	UFUNCTION()
 	void SelectInterview();
-	UFUNCTION()
 	void OnBeginDay();
 	UFUNCTION(BlueprintCallable)
 	void PlaySound(TArray<USoundWave*> Sounds);
+	bool GetTutorial();
+	void SetTutorial(bool NewValue);
+	
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USoundWave* NothingToRepeat;
