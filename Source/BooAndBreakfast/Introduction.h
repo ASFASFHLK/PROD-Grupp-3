@@ -30,10 +30,10 @@ public:
    	void OnInterview();
 	UFUNCTION()
 	void RepeatLastInterview();
-	// UFUNCTION()
-	// void RepeatWithNothingToRepeat();
-	// UFUNCTION()
-	// void SelectInterview();
+	UFUNCTION()
+	void RepeatWithNothingToRepeat();
+	UFUNCTION()
+	void SelectInterview();
 	UFUNCTION()
 	void OnBeginDay();
 	UFUNCTION(BlueprintCallable)
@@ -43,8 +43,10 @@ public:
 	USoundWave* NothingToRepeat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USoundWave* BossIntroduction;
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	// TArray<USoundWave*> Interviews;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<USoundWave*> TutorialLines;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<USoundWave*> Interviews;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<USoundWave*> BossResponses;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -53,7 +55,14 @@ public:
 	UAudioComponent* BossAudio;
 	
 private:
+
+	UFUNCTION()
+	void PlayInterview();
+	UFUNCTION()
+	void PlayTutorial();
 	
+	UPROPERTY()
+	USoundWave* LastSoundMade;
 	UPROPERTY()
 	FTimerHandle StartTimer;
 	UPROPERTY()

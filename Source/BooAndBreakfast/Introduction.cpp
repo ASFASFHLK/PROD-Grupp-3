@@ -33,32 +33,34 @@ void AIntroduction::Tick(float DeltaTime)
 
 void AIntroduction::OnSwitchToNight_Implementation()
 {
-	if(BossAudio)
-	{
-		BossAudio->Stop();
-	}
-	BossResponse = FMath::RandRange(0,3);
-	BossAudio = UGameplayStatics::SpawnSound2D(this, BossResponses[BossResponse], 1,1, 0);
+	UE_LOG(LogTemp, Display, TEXT("SwitchToNightIntroduction"));
+	// if(BossAudio)
+	// {
+	// 	BossAudio->Stop();
+	// }
+	// BossResponse = FMath::RandRange(0,3);
+	// LastSoundMade = BossResponses[BossResponse];
+	// BossAudio = UGameplayStatics::SpawnSound2D(this, BossResponses[BossResponse], 1,1, 0);
 }
 
-void AIntroduction::RepeatLastInterview()
-{
-	if(BossAudio)
-	{
-		if(Tutorial)
-		{
-			BossAudio->Stop();
-			BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
-		}
-		else
-		{
-			BossAudio = UGameplayStatics::SpawnSound2D(this, BossResponses[BossResponse], 1,1, 0);
-		}
-	}
-}
+// void AIntroduction::RepeatLastInterview()
+// {
+// 	if(BossAudio)
+// 	{
+// 		if(Tutorial)
+// 		{
+// 			BossAudio->Stop();
+// 			BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
+// 		}
+// 		else
+// 		{
+// 			BossAudio = UGameplayStatics::SpawnSound2D(this, BossResponses[BossResponse], 1,1, 0);
+// 		}
+// 	}
+// }
 void AIntroduction::OnBeginDay()
 {
-	BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
+	// BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
 }
 
 void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
@@ -67,12 +69,65 @@ void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
 	{
 		BossAudio->Stop();
 	}
-	int32 BossResponseTemp = FMath::RandRange(0, Sounds.Num() - 1);
-	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[BossResponseTemp], 1,1, 0);
+	int32 ResponseTemp = FMath::RandRange(0, Sounds.Num() - 1);
+	LastSoundMade = Sounds[ResponseTemp];
+	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[ResponseTemp], 1,1, 0);
+}
+
+
+// void AIntroduction::OnInterview_Implementation()
+// {
+// 	if(GetWorldTimerManager().TimerExists(StartTimer))
+// 	{
+// 		GetWorldTimerManager().ClearTimer(StartTimer);
+// 	}
+// 	if(BossAudio)
+// 	{
+// 		BossAudio->Stop();
+// 	}
+// 	Tutorial = false;
+// 	PlayerCharacter->SwitchToNight();
+// }
+
+
+
+// old stuff
+
+
+void AIntroduction::RepeatLastInterview()
+{
+	UE_LOG(LogTemp, Display, TEXT("RepeatLastInterview"));
+	if(BossAudio)
+	{
+		BossAudio->Stop();
+	}
+	if(FirstInterview)
+	{
+		RepeatWithNothingToRepeat();
+		return;
+	}
+	BossAudio = UGameplayStatics::SpawnSound2D(this, LastSoundMade);
+	// if(Tutorial)
+	// {
+	// 	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[TutorialSelector]);
+	// 	return;
+	// }// could break
+	// BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + InterviewSelector]);
+}
+void AIntroduction::RepeatWithNothingToRepeat()
+{
+	LastSoundMade = NothingToRepeat;
+	BossAudio = UGameplayStatics::SpawnSound2D(this, NothingToRepeat);
+}
+
+void AIntroduction::SelectInterview()
+{
+	WhichInterview = FMath::RandRange(1,3);
 }
 
 void AIntroduction::OnInterview_Implementation()
 {
+	UE_LOG(LogTemp, Display, TEXT("Interview"));
 	if(GetWorldTimerManager().TimerExists(StartTimer))
 	{
 		GetWorldTimerManager().ClearTimer(StartTimer);
@@ -81,62 +136,36 @@ void AIntroduction::OnInterview_Implementation()
 	{
 		BossAudio->Stop();
 	}
-	Tutorial = false;
-	PlayerCharacter->SwitchToNight();
+	FirstInterview = false;
+	PlayInterview();
 }
 
+void AIntroduction::PlayInterview()
+{
+	if(TutorialSelector >= 3)
+	{
+		Tutorial = false;
+	}
+	if(Tutorial)
+	{
+		PlayTutorial();
+		return;
+	}
+	if(InterviewSelector >= 3)
+	{
+		SelectInterview();
+		InterviewSelector = -1;
+		if(CurrentInterview++ >= NumberOfInterviews)
+		{
+			PlayerCharacter->SwitchToNight();
+		}
+	}
+	LastSoundMade = Interviews[WhichInterview * 4 + ++InterviewSelector];
+	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + ++InterviewSelector]);
+}
 
-
-// old stuff
-
-
-// void AIntroduction::RepeatLastInterview()
-// {
-// 	if(FirstInterview)
-// 	{
-// 		RepeatWithNothingToRepeat();
-// 		return;
-// 	}
-// 	if(Tutorial)
-// 	{
-// 		UGameplayStatics::PlaySound2D(this, Interviews[TutorialSelector]);
-// 		return;
-// 	}// could break
-// 	UGameplayStatics::PlaySound2D(this, Interviews[WhichInterview * 4 + InterviewSelector]);
-// }
-// void AIntroduction::RepeatWithNothingToRepeat()
-// {
-// 	UGameplayStatics::PlaySound2D(this, NothingToRepeat);
-// }
-//
-// void AIntroduction::SelectInterview()
-// {
-// 	WhichInterview = FMath::RandRange(1,3);
-// }
-//
-//
-//
-// void AIntroduction::OnInterview_Implementation()
-// {
-// 	FirstInterview = false;
-// 	if(TutorialSelector >= 3)
-// 	{
-// 		Tutorial = false;
-// 	}
-// 	if(Tutorial)
-// 	{
-// 		UGameplayStatics::PlaySound2D(this, Interviews[++TutorialSelector]);
-// 		return;
-// 	}
-// 	if(InterviewSelector >= 3)
-// 	{
-// 		SelectInterview();
-// 		InterviewSelector = -1;
-// 		if(CurrentInterview++ >= NumberOfInterviews)
-// 		{
-// 			PlayerCharacter->SwitchToNight();
-// 		}
-// 	}
-// 	UGameplayStatics::PlaySound2D(this, Interviews[WhichInterview * 4 + ++InterviewSelector]);
-// }
-
+void AIntroduction::PlayTutorial()
+{
+		LastSoundMade = Interviews[++TutorialSelector];
+		BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[++TutorialSelector]);
+}

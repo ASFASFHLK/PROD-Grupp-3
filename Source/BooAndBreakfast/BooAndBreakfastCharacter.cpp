@@ -56,7 +56,7 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Look);
-		// EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
+		EnhancedInputComponent->BindAction(RepeatAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Repeat);
 		EnhancedInputComponent->BindAction(ProceedAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::Proceed);
 		EnhancedInputComponent->BindAction(LayTrapAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::LayTrap);
 		EnhancedInputComponent->BindAction(Teleport1Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportOne);
@@ -74,25 +74,25 @@ void ABooAndBreakfastCharacter::Repeat()
 	{
 		Introduction->RepeatLastInterview();
 	}
-	else
-	{
-		switch (CurrentRoom)
-		{
-		case 0:
-			CurrentRoom = 2;
-			TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
-			break;
-		case 1:
-			--CurrentRoom;
-			TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
-			break;
-		case 2:
-			--CurrentRoom;
-			TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
-			break;
-		default: ;
-		}
-	}
+	// else
+	// {
+	// 	switch (CurrentRoom)
+	// 	{
+	// 	case 0:
+	// 		CurrentRoom = 2;
+	// 		TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
+	// 		break;
+	// 	case 1:
+	// 		--CurrentRoom;
+	// 		TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
+	// 		break;
+	// 	case 2:
+	// 		--CurrentRoom;
+	// 		TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
+	// 		break;
+	// 	default: ;
+	// 	}
+	// }
 }
 void ABooAndBreakfastCharacter::Proceed()
 {

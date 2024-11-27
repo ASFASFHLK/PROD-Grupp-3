@@ -33,8 +33,8 @@ class ABooAndBreakfastCharacter : public ACharacter
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* ProceedAction;
-	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	// UInputAction* RepeatAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* RepeatAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -78,6 +78,8 @@ public:
 	void LayTrap();
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnLayTrap();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnTutorial(int Step);
 	UFUNCTION()
 	void SetDay(bool NewDay);
 	UFUNCTION(BlueprintImplementableEvent)
