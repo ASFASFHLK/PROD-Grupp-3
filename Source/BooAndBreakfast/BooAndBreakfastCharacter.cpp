@@ -108,6 +108,7 @@ void ABooAndBreakfastCharacter::Proceed()
 	{
 		if(TryTutorialInput(0))
 		{
+			OnTutorial(0);
 			TutorialProgress();
 			return;
 		}
@@ -143,6 +144,7 @@ void ABooAndBreakfastCharacter::LayTrap()
 	{
 		if(TryTutorialInput(5))
 		{
+			OnTutorial(5);
 			TutorialProgress();
 			return;
 		}
@@ -164,6 +166,7 @@ void ABooAndBreakfastCharacter::TeleportOne()
 	{
 		if(TryTutorialInput(2))
 		{
+			OnTutorial(2);
 			TutorialProgress();
 			return;
 		}
@@ -181,6 +184,7 @@ void ABooAndBreakfastCharacter::TeleportTwo()
 	{
 		if(TryTutorialInput(3))
 		{
+			OnTutorial(3);
 			TutorialProgress();
 			return;
 		}
@@ -198,6 +202,7 @@ void ABooAndBreakfastCharacter::TeleportThree()
 	{
 		if(TryTutorialInput(4))
 		{
+			OnTutorial(4);
 			TutorialProgress();
 			return;
 		}
