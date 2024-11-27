@@ -78,6 +78,8 @@ public:
 	void LayTrap();
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnLayTrap();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnTutorial(int Step);
 	UFUNCTION()
 	void SetDay(bool NewDay);
 	UFUNCTION(BlueprintImplementableEvent)

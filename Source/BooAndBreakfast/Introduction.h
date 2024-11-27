@@ -44,6 +44,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USoundWave* BossIntroduction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<USoundWave*> TutorialLines;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<USoundWave*> Interviews;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<USoundWave*> BossResponses;
@@ -53,7 +55,14 @@ public:
 	UAudioComponent* BossAudio;
 	
 private:
+
+	UFUNCTION()
+	void PlayInterview();
+	UFUNCTION()
+	void PlayTutorial();
 	
+	UPROPERTY()
+	USoundWave* LastSoundMade;
 	UPROPERTY()
 	FTimerHandle StartTimer;
 	UPROPERTY()
