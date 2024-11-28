@@ -47,6 +47,8 @@ class ABooAndBreakfastCharacter : public ACharacter
 	UInputAction* Teleport2Action;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* Teleport3Action;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* SonarAction;
 	
 public:
 	ABooAndBreakfastCharacter();
@@ -76,10 +78,16 @@ public:
 	void Proceed();
 	UFUNCTION()
 	void LayTrap();
+	UFUNCTION()
+	void SonarPulse();
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnLayTrap();
 	UFUNCTION(BlueprintImplementableEvent)
+	void OnSonar();
+	UFUNCTION(BlueprintImplementableEvent)
 	void OnTutorial(int Step);
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnTutorialFail(int Step);
 	UFUNCTION()
 	void SetDay(bool NewDay);
 	UFUNCTION(BlueprintImplementableEvent)
@@ -125,8 +133,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	int RoomWithGhost = 0;
 	UPROPERTY()
-	//#ME Add another false
-	TArray<bool> TutorialSections = {true, false, false, false, false, false};
+	TArray<bool> TutorialSections = {true, false, false, false, false, false, false};
 	
 
 };

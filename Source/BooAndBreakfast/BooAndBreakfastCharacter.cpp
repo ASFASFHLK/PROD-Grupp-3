@@ -62,6 +62,7 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		EnhancedInputComponent->BindAction(Teleport1Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportOne);
 		EnhancedInputComponent->BindAction(Teleport2Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportTwo);
 		EnhancedInputComponent->BindAction(Teleport3Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportThree);
+		EnhancedInputComponent->BindAction(SonarAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::SonarPulse);
 	}
 	else
 	{
@@ -74,9 +75,14 @@ void ABooAndBreakfastCharacter::Repeat()
 	{
 		if(TryTutorialInput(1))
 		{
+			OnTutorial(1);
 			TutorialProgress();
-			return;
 		}
+		else
+		{
+			OnTutorialFail(1);
+		}
+		return;
 	}
 	if(Day)
 	{
@@ -110,8 +116,12 @@ void ABooAndBreakfastCharacter::Proceed()
 		{
 			OnTutorial(0);
 			TutorialProgress();
-			return;
 		}
+		else
+		{
+			OnTutorialFail(0);
+		}
+		return;
 	}
 	if(Day)
 	{
@@ -142,17 +152,39 @@ void ABooAndBreakfastCharacter::LayTrap()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(5))
+		if(TryTutorialInput(6))
 		{
-			OnTutorial(5);
+			OnTutorial(6);
 			TutorialProgress();
-			return;
 		}
+		else
+		{
+			OnTutorialFail(6);
+		}
+		return;
 	}
 	if(!Day)
 	{
 		OnLayTrap();
 	}
+}
+
+void ABooAndBreakfastCharacter::SonarPulse()
+{
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(3))
+		{
+			OnTutorial(3);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(3);
+		}
+		return;
+	}
+	OnSonar();
 }
 
 void ABooAndBreakfastCharacter::SetDay(bool NewDay)
@@ -168,8 +200,12 @@ void ABooAndBreakfastCharacter::TeleportOne()
 		{
 			OnTutorial(2);
 			TutorialProgress();
-			return;
 		}
+		else
+		{
+			OnTutorialFail(2);
+		}
+		return;
 	}
 	if(!Day)
  	{
@@ -182,12 +218,16 @@ void ABooAndBreakfastCharacter::TeleportTwo()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(3))
+		if(TryTutorialInput(4))
 		{
-			OnTutorial(3);
+			OnTutorial(4);
 			TutorialProgress();
-			return;
 		}
+		else
+		{
+			OnTutorialFail(4);
+		}
+		return;
 	}
 	if(!Day)
  	{
@@ -200,12 +240,16 @@ void ABooAndBreakfastCharacter::TeleportThree()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(4))
+		if(TryTutorialInput(5))
 		{
-			OnTutorial(4);
+			OnTutorial(5);
 			TutorialProgress();
-			return;
 		}
+		else
+		{
+			OnTutorialFail(5);
+		}
+		return;
 	}
 	if(!Day)
  	{
