@@ -34,7 +34,7 @@ public:
 	void OnBeginDay();
 	UFUNCTION(BlueprintCallable)
 	void PlaySound(TArray<USoundWave*> Sounds);
-	bool GetTutorial();
+	bool GetTutorial() const;
 	void SetTutorial(bool NewValue);
 	
 	

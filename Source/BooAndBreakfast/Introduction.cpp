@@ -74,7 +74,7 @@ void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
 	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[ResponseTemp], 1,1, 0);
 }
 
-bool AIntroduction::GetTutorial()
+bool AIntroduction::GetTutorial() const
 {
 	return Tutorial;
 }
@@ -158,7 +158,6 @@ void AIntroduction::PlayInterview()
 	}
 	if(Tutorial)
 	{
-		PlayTutorial();
 		return;
 	}
 	if(InterviewSelector >= 3)
