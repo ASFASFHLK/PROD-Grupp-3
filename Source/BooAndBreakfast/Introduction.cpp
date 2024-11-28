@@ -60,6 +60,7 @@ void AIntroduction::OnSwitchToNight_Implementation()
 // }
 void AIntroduction::OnBeginDay()
 {
+	SelectInterview();
 	// BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
 }
 
@@ -72,6 +73,15 @@ void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
 	int32 ResponseTemp = FMath::RandRange(0, Sounds.Num() - 1);
 	LastSoundMade = Sounds[ResponseTemp];
 	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[ResponseTemp], 1,1, 0);
+}
+
+void AIntroduction::PlayWrongSound(USoundWave* Sound)
+{
+	if(BossAudio)
+ 	{
+ 		BossAudio->Stop();
+ 	}
+ 	BossAudio = UGameplayStatics::SpawnSound2D(this, Sound, 1,1, 0);
 }
 
 bool AIntroduction::GetTutorial() const
@@ -111,7 +121,7 @@ void AIntroduction::RepeatLastInterview()
 	{
 		BossAudio->Stop();
 	}
-	if(FirstInterview)
+	if(!LastSoundMade)
 	{
 		RepeatWithNothingToRepeat();
 		return;
@@ -146,20 +156,11 @@ void AIntroduction::OnInterview_Implementation()
 	{
 		BossAudio->Stop();
 	}
-	FirstInterview = false;
 	PlayInterview();
 }
 
 void AIntroduction::PlayInterview()
 {
-	if(TutorialSelector >= 3)
-	{
-		Tutorial = false;
-	}
-	if(Tutorial)
-	{
-		return;
-	}
 	if(InterviewSelector >= 3)
 	{
 		SelectInterview();
@@ -167,14 +168,15 @@ void AIntroduction::PlayInterview()
 		if(CurrentInterview++ >= NumberOfInterviews)
 		{
 			PlayerCharacter->SwitchToNight();
+			return;
 		}
 	}
 	LastSoundMade = Interviews[WhichInterview * 4 + ++InterviewSelector];
-	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + ++InterviewSelector]);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + InterviewSelector]);
 }
 
-void AIntroduction::PlayTutorial()
-{
-		LastSoundMade = Interviews[++TutorialSelector];
-		BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[++TutorialSelector]);
-}
+// void AIntroduction::PlayTutorial()
+// {
+// 		LastSoundMade = Interviews[++TutorialSelector];
+// 		BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[++TutorialSelector]);
+// }
