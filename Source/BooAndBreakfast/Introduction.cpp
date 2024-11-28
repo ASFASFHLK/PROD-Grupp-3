@@ -74,7 +74,7 @@ void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
 	LastSoundMade = Sounds[ResponseTemp];
 	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[ResponseTemp], 1,1, 0);
 }
-
+//ME
 void AIntroduction::PlayWrongSound(USoundWave* Sound)
 {
 	if(BossAudio)
@@ -113,7 +113,7 @@ void AIntroduction::SetTutorial(const bool NewValue)
 
 // old stuff
 
-
+//ME
 void AIntroduction::RepeatLastInterview()
 {
 	UE_LOG(LogTemp, Display, TEXT("RepeatLastInterview"));
@@ -144,7 +144,7 @@ void AIntroduction::SelectInterview()
 {
 	WhichInterview = FMath::RandRange(1,3);
 }
-
+//ME
 void AIntroduction::OnInterview_Implementation()
 {
 	UE_LOG(LogTemp, Display, TEXT("Interview"));

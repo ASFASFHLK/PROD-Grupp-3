@@ -162,3 +162,22 @@
 #Teleport to Room: 1, Date: Thu Nov 28 17:39:34 2024
 #Sonar Activated, Date: Thu Nov 28 17:39:39 2024
 #Lost Round, Date: Thu Nov 28 17:39:58 2024
+#Starting new game-------------------, Date: Thu Nov 28 18:46:16 2024
+#Start Game, Date: Thu Nov 28 18:46:21 2024
+#Diffculty selected: 1, Date: Thu Nov 28 18:46:21 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:28 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:30 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:32 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:35 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:37 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:38 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:39 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:40 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:42 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:43 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:44 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:45 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:46 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:47 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:48 2024
+#Sonar Activated, Date: Thu Nov 28 18:47:49 2024
