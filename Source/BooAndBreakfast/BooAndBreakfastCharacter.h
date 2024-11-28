@@ -107,9 +107,9 @@ public:
 	int MinPitch;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AIntroduction* Introduction;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FVector> PositionsToTeleportTo;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FRotator> RotationsToTeleportTo;
 	
 private:
