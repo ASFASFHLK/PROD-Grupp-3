@@ -28,6 +28,7 @@ public:
 	void OnSwitchToNight();
 	UFUNCTION(BlueprintNativeEvent)
    	void OnInterview();
+	UFUNCTION(BlueprintCallable)
 	void RepeatLastInterview();
 	void RepeatWithNothingToRepeat();
 	void SelectInterview();
