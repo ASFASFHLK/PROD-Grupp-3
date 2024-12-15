@@ -113,7 +113,8 @@ void ABooAndBreakfastCharacter::Proceed()
 	if(Introduction->GetTutorial())
 	{
 		if(TryTutorialInput(0))
-		{
+		{	
+
 			OnTutorial(0);
 			TutorialProgress();
 		}
@@ -336,12 +337,15 @@ void ABooAndBreakfastCharacter::TutorialProgress()
 {
 	for(int i = 0; i < TutorialSections.Num(); ++i)
 	{
+		UE_LOG(LogTemp,Warning,TEXT("gothere"));
 		if(TutorialSections[i] == true)
 		{
 			if(i < TutorialSections.Num() - 1)
 			{
+				
 				TutorialSections[i] = false;
 				TutorialSections[i + 1] = true;
+				UE_LOG(LogTemp,Warning,TEXT("gothere2%d"),i);
 				break;
 			}
 			else
