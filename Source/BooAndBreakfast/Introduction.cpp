@@ -74,6 +74,16 @@ void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
 	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[ResponseTemp], 1,1, 0);
 }
 
+bool AIntroduction::GetTutorial()
+{
+	return Tutorial;
+}
+
+void AIntroduction::SetTutorial(const bool NewValue)
+{
+	Tutorial = NewValue;
+}
+
 
 // void AIntroduction::OnInterview_Implementation()
 // {

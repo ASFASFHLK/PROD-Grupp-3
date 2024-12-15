@@ -62,6 +62,7 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		EnhancedInputComponent->BindAction(Teleport1Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportOne);
 		EnhancedInputComponent->BindAction(Teleport2Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportTwo);
 		EnhancedInputComponent->BindAction(Teleport3Action, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::TeleportThree);
+		EnhancedInputComponent->BindAction(SonarAction, ETriggerEvent::Triggered, this, &ABooAndBreakfastCharacter::SonarPulse);
 	}
 	else
 	{
@@ -70,6 +71,19 @@ void ABooAndBreakfastCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 }
 void ABooAndBreakfastCharacter::Repeat()
 {
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(1))
+		{
+			OnTutorial(1);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(1);
+		}
+		return;
+	}
 	if(Day)
 	{
 		Introduction->RepeatLastInterview();
@@ -96,6 +110,19 @@ void ABooAndBreakfastCharacter::Repeat()
 }
 void ABooAndBreakfastCharacter::Proceed()
 {
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(0))
+		{
+			OnTutorial(0);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(0);
+		}
+		return;
+	}
 	if(Day)
 	{
 		Introduction->OnInterview();
@@ -123,10 +150,41 @@ void ABooAndBreakfastCharacter::Proceed()
 
 void ABooAndBreakfastCharacter::LayTrap()
 {
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(6))
+		{
+			OnTutorial(6);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(6);
+		}
+		return;
+	}
 	if(!Day)
 	{
 		OnLayTrap();
 	}
+}
+
+void ABooAndBreakfastCharacter::SonarPulse()
+{
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(3))
+		{
+			OnTutorial(3);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(3);
+		}
+		return;
+	}
+	OnSonar();
 }
 
 void ABooAndBreakfastCharacter::SetDay(bool NewDay)
@@ -135,7 +193,21 @@ void ABooAndBreakfastCharacter::SetDay(bool NewDay)
 }
 
 void ABooAndBreakfastCharacter::TeleportOne()
-{	if(!Day)
+{
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(2))
+		{
+			OnTutorial(2);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(2);
+		}
+		return;
+	}
+	if(!Day)
  	{
 		OnTeleported(1);
 		TeleportTo(PositionsToTeleportTo[0], RotationsToTeleportTo[0]);
@@ -143,7 +215,21 @@ void ABooAndBreakfastCharacter::TeleportOne()
 }
 
 void ABooAndBreakfastCharacter::TeleportTwo()
-{	if(!Day)
+{
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(4))
+		{
+			OnTutorial(4);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(4);
+		}
+		return;
+	}
+	if(!Day)
  	{
 		OnTeleported(2);
 		TeleportTo(PositionsToTeleportTo[1], RotationsToTeleportTo[1]);
@@ -151,12 +237,27 @@ void ABooAndBreakfastCharacter::TeleportTwo()
 }
 
 void ABooAndBreakfastCharacter::TeleportThree()
-{	if(!Day)
+{
+	if(Introduction->GetTutorial())
+	{
+		if(TryTutorialInput(5))
+		{
+			OnTutorial(5);
+			TutorialProgress();
+		}
+		else
+		{
+			OnTutorialFail(5);
+		}
+		return;
+	}
+	if(!Day)
  	{
 		OnTeleported(3);
 		TeleportTo(PositionsToTeleportTo[2], RotationsToTeleportTo[2]);
  	}
 }
+
 
 void ABooAndBreakfastCharacter::SwitchToNight()
 {
@@ -219,42 +320,34 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 					AddControllerYawInput(LookAxisVector.X);
 				}
 			}
-			// if(LookAxisVector.Y >= 0)
-			// {
-			// 	if(C.Pitch < MaxPitch)
-			// 	{
-			// 		AddControllerPitchInput(-LookAxisVector.Y);
-			// 	}
-			// }
-			// if(LookAxisVector.Y < 0)
-			// {
-			// 	if(C.Pitch > MinPitch)
-			// 	{
-			// 		AddControllerPitchInput(-LookAxisVector.Y);
-			// 	}
-			// }
-			// if(R.Yaw + LookAxisVector.X <= MaxYaw && R.Yaw + LookAxisVector.X >= MinYaw)
-			// {
-			// 	AddControllerYawInput(LookAxisVector.X);
-			// }
-			// if(C.Pitch + LookAxisVector.Y <= MaxPitch && C.Pitch + LookAxisVector.X >= MinPitch)
-			// {
-			// 	AddControllerPitchInput(LookAxisVector.Y);
-			// }
-			// if(GetActorRotation().Yaw >MaxYaw) 
-			// {
-			//     R.Yaw = MaxYaw;
-			//     GetParentActor()->SetActorRotation(R);
-			// }
-			// if(GetActorRotation().Yaw < MinYaw)
-			// {
-			//     R.Yaw = MinYaw;
-			//     GetParentActor()->SetActorRotation(R);
-			// }
 		}
 		else
 		{
 			AddControllerYawInput(LookAxisVector.X);
+		}
+	}
+}
+bool ABooAndBreakfastCharacter::TryTutorialInput(int Input)
+{
+	return TutorialSections[Input];
+}
+
+void ABooAndBreakfastCharacter::TutorialProgress()
+{
+	for(int i = 0; i < TutorialSections.Num(); ++i)
+	{
+		if(TutorialSections[i] == true)
+		{
+			if(i < TutorialSections.Num() - 1)
+			{
+				TutorialSections[i] = false;
+				TutorialSections[i + 1] = true;
+				break;
+			}
+			else
+			{
+				Introduction->SetTutorial(false);
+			}
 		}
 	}
 }
