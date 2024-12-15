@@ -28,13 +28,17 @@ public:
 	void OnSwitchToNight();
 	UFUNCTION(BlueprintNativeEvent)
    	void OnInterview();
+	UFUNCTION(BlueprintCallable)
 	void RepeatLastInterview();
 	void RepeatWithNothingToRepeat();
 	void SelectInterview();
 	void OnBeginDay();
 	UFUNCTION(BlueprintCallable)
 	void PlaySound(TArray<USoundWave*> Sounds);
-	bool GetTutorial();
+	UFUNCTION(BlueprintCallable)
+	void PlayWrongSound(USoundWave* Sound);
+	bool GetTutorial() const;
+	UFUNCTION(BlueprintCallable)
 	void SetTutorial(bool NewValue);
 	
 	
@@ -57,8 +61,8 @@ private:
 
 	UFUNCTION()
 	void PlayInterview();
-	UFUNCTION()
-	void PlayTutorial();
+	// UFUNCTION()
+	// void PlayTutorial();
 	
 	UPROPERTY()
 	USoundWave* LastSoundMade;
@@ -68,10 +72,10 @@ private:
 	AActor* Player;
 	UPROPERTY()
 	int32 InterviewSelector = -1;
+	// UPROPERTY()
+	// int32 TutorialSelector = -1;
 	UPROPERTY()
-	int32 TutorialSelector = -1;
-	UPROPERTY()
-	int32 WhichInterview;
+	int32 WhichInterview = 1;
 	UPROPERTY()
 	int32 NumberOfInterviews = 1;
 	UPROPERTY()

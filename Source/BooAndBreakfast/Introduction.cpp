@@ -60,6 +60,7 @@ void AIntroduction::OnSwitchToNight_Implementation()
 // }
 void AIntroduction::OnBeginDay()
 {
+	SelectInterview();
 	// BossAudio = UGameplayStatics::SpawnSound2D(this, BossIntroduction, 1,1, 0);
 }
 
@@ -73,8 +74,17 @@ void AIntroduction::PlaySound(TArray<USoundWave*> Sounds)
 	LastSoundMade = Sounds[ResponseTemp];
 	BossAudio = UGameplayStatics::SpawnSound2D(this, Sounds[ResponseTemp], 1,1, 0);
 }
+//ME
+void AIntroduction::PlayWrongSound(USoundWave* Sound)
+{
+	if(BossAudio)
+ 	{
+ 		BossAudio->Stop();
+ 	}
+ 	BossAudio = UGameplayStatics::SpawnSound2D(this, Sound, 1,1, 0);
+}
 
-bool AIntroduction::GetTutorial()
+bool AIntroduction::GetTutorial() const
 {
 	return Tutorial;
 }
@@ -103,7 +113,7 @@ void AIntroduction::SetTutorial(const bool NewValue)
 
 // old stuff
 
-
+//ME
 void AIntroduction::RepeatLastInterview()
 {
 	UE_LOG(LogTemp, Display, TEXT("RepeatLastInterview"));
@@ -111,7 +121,7 @@ void AIntroduction::RepeatLastInterview()
 	{
 		BossAudio->Stop();
 	}
-	if(FirstInterview)
+	if(!LastSoundMade)
 	{
 		RepeatWithNothingToRepeat();
 		return;
@@ -134,7 +144,7 @@ void AIntroduction::SelectInterview()
 {
 	WhichInterview = FMath::RandRange(1,3);
 }
-
+//ME
 void AIntroduction::OnInterview_Implementation()
 {
 	UE_LOG(LogTemp, Display, TEXT("Interview"));
@@ -146,21 +156,11 @@ void AIntroduction::OnInterview_Implementation()
 	{
 		BossAudio->Stop();
 	}
-	FirstInterview = false;
 	PlayInterview();
 }
 
 void AIntroduction::PlayInterview()
 {
-	if(TutorialSelector >= 3)
-	{
-		Tutorial = false;
-	}
-	if(Tutorial)
-	{
-		PlayTutorial();
-		return;
-	}
 	if(InterviewSelector >= 3)
 	{
 		SelectInterview();
@@ -168,14 +168,15 @@ void AIntroduction::PlayInterview()
 		if(CurrentInterview++ >= NumberOfInterviews)
 		{
 			PlayerCharacter->SwitchToNight();
+			return;
 		}
 	}
 	LastSoundMade = Interviews[WhichInterview * 4 + ++InterviewSelector];
-	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + ++InterviewSelector]);
+	BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[WhichInterview * 4 + InterviewSelector]);
 }
 
-void AIntroduction::PlayTutorial()
-{
-		LastSoundMade = Interviews[++TutorialSelector];
-		BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[++TutorialSelector]);
-}
+// void AIntroduction::PlayTutorial()
+// {
+// 		LastSoundMade = Interviews[++TutorialSelector];
+// 		BossAudio = UGameplayStatics::SpawnSound2D(this, Interviews[++TutorialSelector]);
+// }

@@ -73,15 +73,7 @@ void ABooAndBreakfastCharacter::Repeat()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(1))
-		{
-			OnTutorial(1);
-			TutorialProgress();
-		}
-		else
-		{
-			OnTutorialFail(1);
-		}
+		OnTutorial(1);
 		return;
 	}
 	if(Day)
@@ -112,16 +104,7 @@ void ABooAndBreakfastCharacter::Proceed()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(0))
-		{	
-
-			OnTutorial(0);
-			TutorialProgress();
-		}
-		else
-		{
-			OnTutorialFail(0);
-		}
+		OnTutorial(0);
 		return;
 	}
 	if(Day)
@@ -153,15 +136,7 @@ void ABooAndBreakfastCharacter::LayTrap()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(6))
-		{
-			OnTutorial(6);
-			TutorialProgress();
-		}
-		else
-		{
-			OnTutorialFail(6);
-		}
+		OnTutorial(6);
 		return;
 	}
 	if(!Day)
@@ -174,15 +149,7 @@ void ABooAndBreakfastCharacter::SonarPulse()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(3))
-		{
-			OnTutorial(3);
-			TutorialProgress();
-		}
-		else
-		{
-			OnTutorialFail(3);
-		}
+		OnTutorial(3);
 		return;
 	}
 	OnSonar();
@@ -197,15 +164,7 @@ void ABooAndBreakfastCharacter::TeleportOne()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(2))
-		{
-			OnTutorial(2);
-			TutorialProgress();
-		}
-		else
-		{
-			OnTutorialFail(2);
-		}
+		OnTutorial(2);
 		return;
 	}
 	if(!Day)
@@ -219,15 +178,7 @@ void ABooAndBreakfastCharacter::TeleportTwo()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(4))
-		{
-			OnTutorial(4);
-			TutorialProgress();
-		}
-		else
-		{
-			OnTutorialFail(4);
-		}
+		OnTutorial(4);
 		return;
 	}
 	if(!Day)
@@ -241,15 +192,7 @@ void ABooAndBreakfastCharacter::TeleportThree()
 {
 	if(Introduction->GetTutorial())
 	{
-		if(TryTutorialInput(5))
-		{
-			OnTutorial(5);
-			TutorialProgress();
-		}
-		else
-		{
-			OnTutorialFail(5);
-		}
+		OnTutorial(5);
 		return;
 	}
 	if(!Day)
@@ -328,30 +271,27 @@ void ABooAndBreakfastCharacter::Look(const FInputActionValue& Value)
 		}
 	}
 }
-bool ABooAndBreakfastCharacter::TryTutorialInput(int Input)
-{
-	return TutorialSections[Input];
-}
-
-void ABooAndBreakfastCharacter::TutorialProgress()
-{
-	for(int i = 0; i < TutorialSections.Num(); ++i)
-	{
-		UE_LOG(LogTemp,Warning,TEXT("gothere"));
-		if(TutorialSections[i] == true)
-		{
-			if(i < TutorialSections.Num() - 1)
-			{
-				
-				TutorialSections[i] = false;
-				TutorialSections[i + 1] = true;
-				UE_LOG(LogTemp,Warning,TEXT("gothere2%d"),i);
-				break;
-			}
-			else
-			{
-				Introduction->SetTutorial(false);
-			}
-		}
-	}
-}
+// bool ABooAndBreakfastCharacter::TryTutorialInput(int Input)
+// {
+// 	return TutorialSections[Input];
+// }
+//
+// void ABooAndBreakfastCharacter::TutorialProgress()
+// {
+// 	for(int i = 0; i < TutorialSections.Num(); ++i)
+// 	{
+// 		if(TutorialSections[i] == true)
+// 		{
+// 			if(i < TutorialSections.Num() - 1)
+// 			{
+// 				TutorialSections[i] = false;
+// 				TutorialSections[i + 1] = true;
+// 				break;
+// 			}
+// 			else
+// 			{
+// 				Introduction->SetTutorial(false);
+// 			}
+// 		}
+// 	}
+// }

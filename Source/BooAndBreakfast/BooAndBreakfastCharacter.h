@@ -86,8 +86,8 @@ public:
 	void OnSonar();
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnTutorial(int Step);
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnTutorialFail(int Step);
+	// UFUNCTION(BlueprintImplementableEvent)
+	// void OnTutorialFail(int Step);
 	UFUNCTION()
 	void SetDay(bool NewDay);
 	UFUNCTION(BlueprintImplementableEvent)
@@ -107,17 +107,17 @@ public:
 	int MinPitch;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AIntroduction* Introduction;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FVector> PositionsToTeleportTo;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FRotator> RotationsToTeleportTo;
 	
 private:
 	void TeleportOne();
 	void TeleportTwo();
 	void TeleportThree();
-	bool TryTutorialInput(int Input);
-	void TutorialProgress();
+	// bool TryTutorialInput(int Input);
+	// void TutorialProgress();
 	
 	
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
@@ -132,8 +132,8 @@ private:
 	int RoomToReport = 3;
 	UPROPERTY(VisibleAnywhere)
 	int RoomWithGhost = 0;
-	UPROPERTY()
-	TArray<bool> TutorialSections = {true, false, false, false, false, false, false};
+	// UPROPERTY()
+	// TArray<bool> TutorialSections = {true, false, false, false, false, false, false};
 	
 
 };
