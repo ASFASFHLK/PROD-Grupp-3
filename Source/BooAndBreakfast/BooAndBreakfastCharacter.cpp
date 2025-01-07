@@ -45,6 +45,7 @@ void ABooAndBreakfastCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+	SwitchToNight();
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
